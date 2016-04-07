@@ -1,14 +1,13 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>{{ collection.title }}</h2>
+  <div>
+    <h2>{{ model.title }}</h2>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    collection: Object
+    model: Object
   },
 
   data () {
@@ -17,7 +16,6 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-      msg: 'Hello World!'
     }
   }
 }

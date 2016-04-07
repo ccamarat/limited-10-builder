@@ -1,4 +1,6 @@
+import '../vendors/shopify-sdk/shopify-buy.polyfilled.globals.min';
 import Cache from '../cache';
+import Product from './product';
 
 const config = {
   client: {
@@ -19,6 +21,10 @@ const store = cache.get('store') || {
   },
   products: []
 };
+
+store.products.forEach((product, index) => {
+  store.products[index] = new Product(product);
+});
 
 const isLoaded = () => {
   return store.products.length;
