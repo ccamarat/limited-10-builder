@@ -2,13 +2,15 @@
   <div class="product">
     <h3>{{ product.title }}</h3>
     <p v-html="product.body_html"></p>
+    <product-thumbnail :product="product"></product-thumbnail>
     <product-options v-for="option in product.options" :option="option"></product-options>
-    Selected Variant: {{ selectedVariantId }}, img: {{ selectedVariantImage }}
+    Selected Variant: {{ selectedVariantId }}
   </div>
 </template>
 
 <script type="text/babel">
   import productOptions from './product-options';
+  import productThumbnail from './product-thumbnail';
 
   export default {
     props: {
@@ -16,23 +18,13 @@
     },
 
     components: {
-      productOptions
+      productOptions,
+      productThumbnail
     },
 
     computed: {
       selectedVariantId () {
-        const variantName = this.product.options.map(option => option.selected).join(' / ');
-        const variant = this.product.variants.find(variant => variant.title === variantName);
-        return variant.id;
-      },
-
-      selectedVariantImage () {
-        if (!this.product.images || this.product.images.length === 0) {
-          return '';
-        }
-        const selectedVariantId = this.selectedVariantId;
-        const img = this.product.images.find(image => image.variant_ids.find(variantId => variantId === selectedVariantId));
-        return img ? img.src : '';
+        return this.product.getSelectedVariantId();
       }
     }
   }

@@ -43,7 +43,7 @@ const fetch = () => {
     });
   };
 
-  client.fetchCollection(221262849)
+  client.fetchCollection(config.collectionId)
     .then(function (response) {
       const collection = unpackResponse([response])[0];
       store.collection.title = collection.title;

@@ -6,8 +6,16 @@ const contains = (array, optionValue) => {
 
 export default class Product {
   constructor (raw) {
-    Object.assign(this, raw);
-    this.variants.forEach((variant) => {
+    const self = this;
+    Object.assign(self, raw);
+
+    self.getSelectedVariantId = () => {
+      const variantName = self.options.map(option => option.selected).join(' / ');
+      const variant = self.variants.find(variant => variant.title === variantName);
+      return variant.id;
+    };
+
+    self.variants.forEach((variant) => {
       variant.option_values.forEach((optionValue, index) => {
         let values = raw.options[index].values;
         optionValue = optionValue.value;
