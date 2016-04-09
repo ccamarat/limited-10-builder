@@ -7,7 +7,7 @@
 </template>
 
 <script type="text/babel">
-  const DEFAULT_THUMBNAIL = '/static/404.png';
+  const DEFAULT_THUMBNAIL = 'https://raw.githubusercontent.com/ccamarat/limited-10-builder/gh-pages/static/404.png';
   export default {
     props: {
       product: Object
