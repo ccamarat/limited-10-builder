@@ -11,15 +11,18 @@ const DEFAULT_STORE = {
 };
 
 export default function (config) {
+  const self = this;
   const store = DEFAULT_STORE;
   let client;
 
   const buildStore = (results) => {
     Object.assign(store.collection, results.collection);
-    // store.collection.title = results.collection.title;
     results.products.forEach((product, index) => {
       store.products.push(new Product(product));
     });
+    if (typeof self.ready === 'function') {
+      self.ready();
+    }
   };
 
   this.init = () => {

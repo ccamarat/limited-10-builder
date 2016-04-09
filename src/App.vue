@@ -10,6 +10,7 @@
 <script type="text/babel">
   import config from './config';
   import DataStore from './data-store';
+  import watchWindowSize from './tools/window-size-monitor';
   import collection from './components/collection'
   import productList from './components/product-list'
   import quantitySelector from './components/quantity-selector';
@@ -25,6 +26,7 @@
 
     init () {
       this.store = new DataStore(config);
+      watchWindowSize(this.store);
       this.store.init();
     },
 
