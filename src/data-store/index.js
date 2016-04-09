@@ -47,7 +47,14 @@ export default function (config) {
     const selections = store.products.map(product => product.getSelectedVariant());
     return client.addToCart(selections, store.quantity)
       .then(cart => {
-        document.location = cart.checkoutUrl;
+        if (window.parent !== window) {
+          window.parent.postMessage({
+            message: 'order-complete',
+            checkoutUrl: cart.checkoutUrl
+          }, '*');
+        } else {
+          window.location = cart.checkoutUrl;
+        }
       });
   };
 };

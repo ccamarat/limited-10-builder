@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<h1>y0o yo yo yo</h1>
+
 <!-- start "page" template -->
 <style>
 #custom-builder {
@@ -17,14 +19,22 @@
 
 <script>
 (function () {
-  var origin = 'http://localhost';
-  var src = origin + ':8080';
+  var origin = 'http://ccamarat.github.io';
+  var src = origin + '/limited-10-builder/';
   var frame = document.getElementById('custom-builder');
+  var handlers = {
+    'resize': function (data) {
+      frame.height = data.height;
+    },
+    'order-complete': function (data) {
+      window.location = data.checkoutUrl;
+    }
+  };
   window.addEventListener('message', function (event) {
     // Verify that the message came from the custom builder that we deployed; ignore all other messages
     if (~event.origin.indexOf(origin)) {
-      if (event.data.message === 'resize') {
-        frame.height = event.data.height;
+      if (handlers[event.data.message]) {
+        handlers[event.data.message](event.data);
       }
     }
   });
