@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="btn" @click="handleClick()" :disabled="isBuying">Buy Now!</button>
+    <button class="btn" @click="handleClick()" :disabled="isBuying">Take my money!</button>
   </div>
 </template>
 
@@ -18,11 +18,8 @@
 
     methods: {
       handleClick () {
-        // const self = this;
         this.isBuying = true;
-        this.store.addToCart().then(() => {
-          // self.isBuying = false;
-        });
+        this.store.addToCart();
       }
     }
   }

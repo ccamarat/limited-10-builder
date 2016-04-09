@@ -3,10 +3,10 @@
 // we are also using it with karma-webpack
 //   https://github.com/webpack/karma-webpack
 
-var path = require('path')
-var merge = require('webpack-merge')
-var baseConfig = require('../../build/webpack.base.conf')
-var projectRoot = path.resolve(__dirname, '../../')
+var path = require('path');
+var merge = require('webpack-merge');
+var baseConfig = require('../../build/webpack.base.conf');
+var projectRoot = path.resolve(__dirname, '../../');
 
 var webpackConfig = merge(baseConfig, {
   // use inline sourcemap for karma-sourcemap-loader
@@ -16,10 +16,10 @@ var webpackConfig = merge(baseConfig, {
       js: 'isparta'
     }
   }
-})
+});
 
 // no need for app entry during tests
-delete webpackConfig.entry
+delete webpackConfig.entry;
 
 // make sure isparta loader is applied before eslint
 webpackConfig.module.preLoaders.unshift({
@@ -27,15 +27,15 @@ webpackConfig.module.preLoaders.unshift({
   loader: 'isparta',
   include: projectRoot,
   exclude: /test\/unit|node_modules/
-})
+});
 
 // only apply babel for test files when using isparta
 webpackConfig.module.loaders.some(function (loader, i) {
   if (loader.loader === 'babel') {
-    loader.include = /test\/unit/
-    return true
+    loader.include = /test\/unit/;
+    return true;
   }
-})
+});
 
 module.exports = function (config) {
   config.set({
@@ -62,4 +62,4 @@ module.exports = function (config) {
       ]
     }
   })
-}
+};

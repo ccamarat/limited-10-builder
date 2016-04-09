@@ -5,5 +5,5 @@ export default {
     appId: '6'
   },
   collectionId: 221262849,
-  cacheLifetime: 10 // 0 = unlimited
+  cacheLifetime: 24 * 3600 * 1000 // 0 = unlimited
 };

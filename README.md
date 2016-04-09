@@ -1,8 +1,10 @@
 # builder
 
-> A Vue.js project
+> A Vue.js project, customized for The Jigganaut.
 
 ## Build Setup
+
+Install [Node JS](https://nodejs.org/en/)
 
 ``` bash
 # install dependencies
