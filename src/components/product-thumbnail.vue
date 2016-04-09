@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <img class="product-preview" :src="selectedVariantImage" />
-  </div>
+  <span class="grid-link__image grid-link__image--product">
+    <span class="grid-link__image-centered">
+      <img :src="selectedVariantImage"/>
+    </span>
+  </span>
 </template>
 
 <script type="text/babel">
@@ -25,7 +27,4 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-  .product-preview {
-    max-width: 200px;
-  }
 </style>

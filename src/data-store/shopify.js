@@ -1,72 +1,81 @@
-import '../vendors/shopify-sdk/shopify-buy.polyfilled.globals.min';
-import Cache from '../cache';
-import Product from './product';
+// import '../vendors/shopify-sdk/shopify-buy.polyfilled.globals.min';
 
-const config = {
-  client: {
-    apiKey: 'cccc9170b9d1911d095a199a51df92d4',
-    myShopifyDomain: 'rails-test-42',
-    appId: '6'
-  },
-  collectionId: 221262849,
-  cacheLifetime: 0 // 0 = unlimited
-};
+/*
+ export default function (config) {
+ const shopClient = window.ShopifyBuy.buildClient(config.client);
 
-const cache = new Cache();
-const client = window.ShopifyBuy.buildClient(config.client);
+ let cart;
+ shopClient.createCart().then(function (newCart) {
+ cart = newCart;
+ });
+ if (cart) {
+ cart.addVariants({});
+ }
 
-const store = cache.get('store') || {
-  collection: {
-    title: ''
-  },
-  products: []
-};
+ shopClient.fetchProduct(5613172993)
+ .then(function (product) {
+ console.log(product);
+ })
+ .catch(function () {
+ console.log('Request failed');
+ });
 
-store.products.forEach((product, index) => {
-  store.products[index] = new Product(product);
-});
+ this.fetch = function () {
+ return new Promise(() => {
+ });
+ }
+ }
+ */
 
-const isLoaded = () => {
-  return store.products.length;
-};
+export default function ShopifyClient(config) {
+  const store = {};
+  const client = window.ShopifyBuy.buildClient(config.client);
+  let cart;
 
-const fetch = () => {
-  const maybeUpdateCache = () => {
-    if (isLoaded) {
-      cache.set('store', store, config.cacheLifetime);
-    }
+  client.createCart().then(function (newCart) {
+    cart = newCart;
+  });
+
+  const isLoaded = () => {
+    return store.products && store.collection;
   };
 
-  const unpackResponse = (response) => {
-    return response.map((item) => {
-      return item.attrs;
+  this.fetch = () => {
+    return new Promise((resolve, reject) => {
+      const maybeReturn = () => {
+        if (isLoaded()) {
+          resolve(store);
+        }
+      };
+
+      const unpackResponse = (response) => {
+        return response.map((item) => {
+          return item.attrs;
+        });
+      };
+
+      client.fetchCollection(config.collectionId)
+        .then(function (response) {
+          store.collection = unpackResponse([response])[0];
+          // store.collection = response;
+          maybeReturn();
+        })
+        .catch(reject);
+
+      client.fetchQueryProducts({collection_id: config.collectionId})
+        .then(function (response) {
+          store.products = unpackResponse(response);
+          // store.products = response;
+          maybeReturn();
+        })
+        .catch(reject);
     });
   };
 
-  client.fetchCollection(config.collectionId)
-    .then(function (response) {
-      const collection = unpackResponse([response])[0];
-      store.collection.title = collection.title;
-      maybeUpdateCache();
-    })
-    .catch(function (e) {
-      console.log('Request failed', e);
+  this.addToCart = (variants, quantity) => {
+    const items = variants.map((variant) => {
+      return {variant, quantity};
     });
-
-  client.fetchQueryProducts({collection_id: config.collectionId})
-    .then(function (response) {
-      // console.log(response);
-      store.products = unpackResponse(response);
-      maybeUpdateCache();
-      // console.log(store.products);
-    })
-    .catch(function (e) {
-      console.log('Request failed', e);
-    });
+    return cart.addVariants.apply(cart, items);
+  };
 };
-
-if (!isLoaded()) {
-  fetch();
-}
-
-export default store;

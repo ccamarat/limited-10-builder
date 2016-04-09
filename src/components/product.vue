@@ -1,10 +1,12 @@
 <template>
-  <div class="product">
-    <h3>{{ product.title }}</h3>
-    <p v-html="product.body_html"></p>
+  <div class="custom-product grid__item medium--one-third post-large--one-third">
     <product-thumbnail :product="product"></product-thumbnail>
+    <p class="grid-link__title">{{ product.title }}</p>
+    <p v-html="product.body_html"></p>
     <product-options v-for="option in product.options" :option="option"></product-options>
-    Selected Variant: {{ selectedVariantId }}
+    <p class="grid-link__meta">
+      Cost: {{ selectedVariant.price }}
+    </p>
   </div>
 </template>
 
@@ -23,17 +25,15 @@
     },
 
     computed: {
-      selectedVariantId () {
-        return this.product.getSelectedVariantId();
+      selectedVariant () {
+        return this.product.getSelectedVariant();
       }
     }
   }
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-  .product {
-    display: inline-block;
-    width: 30%;
-    border: 1px solid black;
+  .custom-product {
+    
   }
 </style>

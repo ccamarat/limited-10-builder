@@ -12,6 +12,8 @@ module.exports = {
     'semi': 0,
     // ignore quotes for now
     'quotes': 0,
+    // Lame rule
+    'space-before-function-paren': 0,
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow debugger during development

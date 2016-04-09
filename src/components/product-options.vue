@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <b>{{ option.name }}</b>
-    <select v-model="option.selected" @:change="onChange">
-      <option v-for="value in option.values" :value="value">{{value}}</option>
-    </select>
-    Selected: {{option.selected}}
+  <div class="selector-wrapper">
+    <label>{{ option.name }}
+      <select class="single-option-selector" v-model="option.selected">
+        <option v-for="value in option.values" :value="value">{{value}}</option>
+      </select>
+    </label>
   </div>
 </template>
 
@@ -12,21 +12,6 @@
   export default {
     props: {
       option: Object
-    },
-
-    data () {
-      return {
-        // note: changing this line won't causes changes
-        // with hot-reload because the reloaded component
-        // preserves its current state and we are modifying
-        // its initial state.
-      }
-    },
-
-    methods: {
-      onChange () {
-        console.log('change', this.option.selected);
-      }
     }
   }
 </script>
