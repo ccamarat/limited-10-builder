@@ -1,6 +1,8 @@
+import ShopifyBuy from 'ShopifyBuy';
+
 export default function ShopifyClient(config) {
   const store = {};
-  const client = window.ShopifyBuy.buildClient(config.client);
+  const client = ShopifyBuy.buildClient(config.client);
   let cart;
 
   client.createCart().then(function (newCart) {
@@ -23,6 +25,7 @@ export default function ShopifyClient(config) {
     // Normalize casing
     sortOrder.forEach((value, index) => {
       sortOrder[index] = value.toLowerCase();
+      nonConfiguredProducts[index] = value.toLowerCase();
     });
 
     // `productComparer` is used to sort the product array using `Array.prototpe.sort()`. Since every product goes
@@ -44,14 +47,18 @@ export default function ShopifyClient(config) {
         if (!unsortableProducts.includes(nameA)) {
           unsortableProducts.push(nameA);
         }
-      // remove found items from unconfigured items list
-      } else {
+        // remove found items from unconfigured items list
+      } else if (nonConfiguredProducts.includes(nameA)) {
         nonConfiguredProducts.splice(nonConfiguredProducts.indexOf(nameA), 1);
       }
 
       // for consistency, unsortables should have same index whether they're "a" or "b"
       if (indexB === -1) {
         indexB = sortOrder.length;
+        // track unsortables
+        if (!unsortableProducts.includes(nameB)) {
+          unsortableProducts.push(nameB);
+        }
       }
 
       // indicate the sort relationship to the caller

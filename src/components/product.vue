@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script type="text/babel">
+<script>
   import productOptions from './product-options';
   import productThumbnail from './product-thumbnail';
 
@@ -34,6 +34,6 @@
 
 <style lang="scss" rel="stylesheet/scss">
   .custom-product {
-    
+
   }
 </style>

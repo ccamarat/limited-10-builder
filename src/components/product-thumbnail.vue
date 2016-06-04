@@ -6,7 +6,7 @@
   </span>
 </template>
 
-<script type="text/babel">
+<script>
   const DEFAULT_THUMBNAIL = 'https://raw.githubusercontent.com/ccamarat/limited-10-builder/gh-pages/static/404.png';
   export default {
     props: {

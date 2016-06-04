@@ -6,10 +6,10 @@
   </div>
 </template>
 
-<script type="text/babel">
-export default {
-  props: {
-    model: Object
+<script>
+  export default {
+    props: {
+      model: Object
+    }
   }
-}
 </script>
