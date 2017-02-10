@@ -1,5 +1,7 @@
 # builder
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/logan-engineering/limited-10-builder.svg)](https://greenkeeper.io/)
+
 > A Vue.js project, customized for The Jigganaut.
 
 ## Build Setup
