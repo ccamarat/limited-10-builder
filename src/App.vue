@@ -7,16 +7,20 @@
   </div>
 </template>
 
-<script type="text/babel">
-  import config from './config';
-  import DataStore from './data-store';
-  import watchWindowSize from './tools/window-size-monitor';
+<script>
   import collection from './components/collection'
   import productList from './components/product-list'
   import quantitySelector from './components/quantity-selector';
   import buyButton from './components/buy-button';
 
   export default {
+    props: {
+      store: {
+        type: Object,
+        required: true
+      }
+    },
+
     components: {
       collection,
       productList,
@@ -24,15 +28,8 @@
       buyButton
     },
 
-    init () {
-      this.store = new DataStore(config);
-      watchWindowSize(this.store);
-      this.store.init();
-    },
-
     data () {
       return {
-        store: this.store,
         collection: this.store.state.collection,
         products: this.store.state.products
       }

@@ -1,6 +1,6 @@
-var path = require('path')
-var cssLoaders = require('./css-loaders')
-var projectRoot = path.resolve(__dirname, '../')
+var path = require('path');
+var cssLoaders = require('./css-loaders');
+var projectRoot = path.resolve(__dirname, '../');
 
 module.exports = {
   entry: {
@@ -9,7 +9,12 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist/static'),
     publicPath: './static/',
-    filename: '[name].js'
+    filename: '[name].js',
+    libraryTarget: 'var',
+    library: 'bagb'
+  },
+  externals: {
+    ShopifyBuy: 'ShopifyBuy'
   },
   resolve: {
     extensions: ['', '.js', '.vue'],
@@ -71,4 +76,4 @@ module.exports = {
   eslint: {
     formatter: require('eslint-friendly-formatter')
   }
-}
+};

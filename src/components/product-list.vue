@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script type="text/babel">
+<script>
   import product from './product';
 
   export default {

@@ -1,13 +1,13 @@
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var baseConfig = require('./webpack.base.conf')
-var cssLoaders = require('./css-loaders')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var webpack = require('webpack');
+var merge = require('webpack-merge');
+var baseConfig = require('./webpack.base.conf');
+var cssLoaders = require('./css-loaders');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // whether to generate source map for production files.
 // disabling this can speed up the build.
-var SOURCE_MAP = true
+var SOURCE_MAP = true;
 
 module.exports = merge(baseConfig, {
   devtool: SOURCE_MAP ? '#source-map' : false,
@@ -54,4 +54,4 @@ module.exports = merge(baseConfig, {
       }
     })
   ]
-})
+});

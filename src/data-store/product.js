@@ -5,8 +5,9 @@ const contains = (array, optionValue) => {
 };
 
 export default class Product {
-  constructor (raw) {
+  constructor(raw) {
     const self = this;
+    // graft the raw data structure onto `this` object
     Object.assign(self, raw);
 
     self.getSelectedVariant = () => {
@@ -18,6 +19,8 @@ export default class Product {
       return self.getSelectedVariant().id;
     };
 
+    // while the raw data contains an "options" object, that object doesn't actually contain the list of values available
+    // for itself. To get it, we need to iterate through the variants instead.
     self.variants.forEach((variant) => {
       variant.option_values.forEach((optionValue, index) => {
         let values = raw.options[index].values;
