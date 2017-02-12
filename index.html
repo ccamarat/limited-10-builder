@@ -12,10 +12,10 @@
 <body>
 <div class="wrapper main-content">
   <div class="grid">
-    <app :store="store"></app>
+	<div id="app"></div>
   </div>
 </div>
-<script src="http://sdks.shopifycdn.com/js-buy-sdk/latest/shopify-buy.polyfilled.globals.min.js"></script>
+<!-- script src="http://sdks.shopifycdn.com/js-buy-sdk/latest/shopify-buy.polyfilled.globals.min.js"></script -->
 <!-- built files will be auto injected -->
 <script>
   !function () {
@@ -45,7 +45,7 @@
       var testConfig = {
         client: {
           apiKey: 'cccc9170b9d1911d095a199a51df92d4',
-          myShopifyDomain: 'rails-test-42',
+          domain: 'rails-test-42.myshopify.com',
           appId: '6'
         },
         collection: {
@@ -74,7 +74,7 @@
         cacheLifetime: 0 // 0 = unlimited
       };
 
-      window.bagb.build('body', testConfig);
+      window.bagb.build('#app', testConfig);
     });
   }();
 </script>

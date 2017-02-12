@@ -20,5 +20,4 @@ describe('collection', () => {
 
     expect(vm.$el.querySelector('h2').textContent.trim()).toBe(store.title);
   });
-
 });

@@ -14,13 +14,13 @@
   import buyButton from './components/buy-button';
 
   export default {
+    name: 'app',
     props: {
       store: {
         type: Object,
         required: true
       }
     },
-
     components: {
       collection,
       productList,

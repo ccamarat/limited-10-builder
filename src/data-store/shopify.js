@@ -1,4 +1,4 @@
-import ShopifyBuy from 'ShopifyBuy';
+import ShopifyBuy from 'shopify-buy';
 
 export default function ShopifyClient(config) {
   const store = {};
