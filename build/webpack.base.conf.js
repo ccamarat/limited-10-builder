@@ -33,9 +33,9 @@ module.exports = {
       'components': resolve('src/components')
     }
   },
-  externals: {
-    ShopifyBuy: 'ShopifyBuy'
-  },
+//  externals: {
+//    'shopify-buy': 'shopify-buy'
+//  },
   module: {
     rules: [
       {
