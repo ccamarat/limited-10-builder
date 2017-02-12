@@ -13,7 +13,7 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "stp": "git subtree push --prefix dist heroku master"
+    "stp": "git subtree push --prefix dist origin heroku"
   },
   "dependencies": {
     "babel-polyfill": "^6.7.4",
