@@ -1,0 +1,59 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><title>builder</title><link href=//cdn.shopify.com/s/files/1/1143/6284/t/3/assets/timber.scss.css?9899783939290997664 rel=stylesheet type=text/css media=all><link href=//cdn.shopify.com/s/files/1/1143/6284/t/3/assets/theme.scss.css?9899783939290997664 rel=stylesheet type=text/css media=all><link href="//fonts.googleapis.com/css?family=Asap:400" rel=stylesheet type=text/css media=all><link href=/static/css/app.f19660f6982dc5cac94754fa9dbe8e8c.css rel=stylesheet></head><body><div class="wrapper main-content"><div class=grid><div id=app></div></div></div><script>!function () {
+    document.addEventListener("DOMContentLoaded", function () {
+      var linkedOptions = {
+        'Length.Length': ['Frame.Length', 'Barrel.Length', 'Slide.Length']
+      };
+      var sortOrder = [
+        'Frame',
+        'Length',
+        'Configuration',
+        'Barrel',
+        'Performance Options',
+        'Slide',
+        'Grip',
+        'Magwell',
+        'Trigger',
+        'Hammer',
+        'Sear',
+        'Disconnector',
+        'Thumb Safety',
+        'Grip Safety',
+        'Slide Stop',
+        'Front Sight',
+        'Rear Sight',
+        'Mag Button'];
+      var testConfig = {
+        client: {
+          apiKey: 'cccc9170b9d1911d095a199a51df92d4',
+          domain: 'rails-test-42.myshopify.com',
+          appId: '6'
+        },
+        collection: {
+          id: 221262849
+        },
+        products: {
+          sortOrder,
+          linkedOptions
+        },
+        collectionId: 221262849,
+        cacheLifetime: 24 * 3600 * 1000 // 0 = unlimited
+      };
+      var prodConfig = {
+        client: {
+          apiKey: '1b69ce14bebfed248f488343efe88a8a',
+          myShopifyDomain: 'limitedten',
+          appId: '6'
+        },
+        collection: {
+          id: 175354177
+        },
+        products: {
+          sortOrder,
+          linkedOptions
+        },
+        cacheLifetime: 0 // 0 = unlimited
+      };
+
+      window.bagb.build('#app', testConfig);
+    });
+  }();</script><script type=text/javascript src=/static/js/manifest.c021f53f7c11ad3aedfa.js></script><script type=text/javascript src=/static/js/vendor.a74e027ee78f87116205.js></script><script type=text/javascript src=/static/js/app.1f42dd7f29324bf70d52.js></script></body></html>
