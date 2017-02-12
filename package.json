@@ -1,0 +1,28 @@
+{
+  "name": "builder",
+  "version": "0.2.0",
+  "description": "A Vue.js project",
+  "author": "Chris Camaratta <chris.camaratta@hotmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "node build/dev-server.js",
+    "build": "node build/build.js",
+    "x-postbuild": "rimraf ../gh-pages/static && cp -r ./dist/* ../gh-pages",
+    "unit:ci": "karma start test/unit/karma.conf.js --single-run",
+    "unit": "karma start test/unit/karma.conf.js",
+    "e2e": "node test/e2e/runner.js",
+    "test": "npm run unit && npm run e2e",
+    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
+    "stp": "git subtree push --prefix dist origin heroku"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.7.4",
+    "babel-runtime": "^6.22.0",
+    "shopify-buy": "^0.6.1",
+    "vue": "^2.1.10"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  }
+}
