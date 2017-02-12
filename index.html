@@ -12,7 +12,7 @@
 <body>
 <div class="wrapper main-content">
   <div class="grid">
-    <app :store="store"></app>
+	<div id="app"></div>
   </div>
 </div>
 <script src="http://sdks.shopifycdn.com/js-buy-sdk/latest/shopify-buy.polyfilled.globals.min.js"></script>
@@ -74,7 +74,7 @@
         cacheLifetime: 0 // 0 = unlimited
       };
 
-      window.bagb.build('body', testConfig);
+      window.bagb.build('#app', testConfig);
     });
   }();
 </script>
