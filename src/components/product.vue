@@ -26,7 +26,7 @@
 
     computed: {
       selectedVariant () {
-        return this.product.getSelectedVariant();
+        return this.$dispatcher.getSelectedVariant(this.product);
       }
     }
   }

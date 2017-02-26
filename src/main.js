@@ -3,12 +3,17 @@
 import Vue from 'vue'
 import App from './App'
 import DataStore from './data-store';
+import Shopify from "./data-store/shopify";
+import Cache from "./cache";
 import {Dispatcher} from './data-store/dispatcher';
 import 'babel-polyfill';
 
 export function build(el, config) {
-  const store = new DataStore(config);
-  const dispatcher = new Dispatcher(config, store);
+  const client = new Shopify(config);
+  const cache = new Cache();
+  const store = new DataStore(config, client, cache);
+  const dispatcher = new Dispatcher(config, store, client);
+
   store.init();
 
   Vue.use({
