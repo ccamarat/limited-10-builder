@@ -11,11 +11,12 @@
 <script>
   export default {
     props: {
+      productId: Number,
       option: Object
     },
     methods: {
       handleChange (event) {
-        console.log(event.srcElement.value);
+        this.$dispatcher.updateSelection(this.productId, this.option.id, event.srcElement.value);
       }
     }
   }

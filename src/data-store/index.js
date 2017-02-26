@@ -7,6 +7,7 @@ const DEFAULT_STORE = {
     title: ''
   },
   products: [],
+  selections: [],
   quantity: 1
 };
 

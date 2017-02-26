@@ -9,7 +9,7 @@ export default class Product {
     const self = this;
     // graft the raw data structure onto `this` object
     Object.assign(self, raw);
-
+    console.log(raw);
     self.getSelectedVariant = () => {
       const variantName = self.options.map(option => option.selected).join(' / ');
       return self.variants.find(variant => variant.title === variantName);
