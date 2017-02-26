@@ -1,7 +1,7 @@
 <template>
   <div class="selector-wrapper">
     <label>{{ option.name }}
-      <select class="single-option-selector" v-model="option.selected" v-on:change="handleChange">
+      <select class="single-option-selector" v-model="selection">
         <option v-for="value in option.values" :value="value">{{value}}</option>
       </select>
     </label>
@@ -11,12 +11,16 @@
 <script>
   export default {
     props: {
-      productId: Number,
       option: Object
     },
-    methods: {
-      handleChange (event) {
-        this.$dispatcher.updateSelection(this.productId, this.option.id, event.srcElement.value);
+    computed: {
+      selection: {
+        get () {
+          return this.$selections[this.option.id];
+        },
+        set (value) {
+          this.$dispatcher.updateSelection(this.option.id, value);
+        }
       }
     }
   }

@@ -18,7 +18,11 @@
         if (!this.product.images || this.product.images.length === 0) {
           return DEFAULT_THUMBNAIL;
         }
-        const selectedVariantId = this.product.getSelectedVariantId();
+        const selectedVariant = this.$dispatcher.getSelectedVariant(this.product);
+        if (!selectedVariant) {
+          return DEFAULT_THUMBNAIL;
+        }
+        const selectedVariantId = selectedVariant.id;
         const img = this.product.images.find(image => image.variant_ids.find(variantId => variantId === selectedVariantId));
         return img ? img.src : DEFAULT_THUMBNAIL;
       }

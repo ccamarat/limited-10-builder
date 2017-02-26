@@ -7,7 +7,10 @@ const DEFAULT_STORE = {
     title: ''
   },
   products: [],
-  selections: [],
+  productsById: {},
+  optionsById: {},
+  variantsById: {},
+  selections: {},
   quantity: 1
 };
 
@@ -19,8 +22,16 @@ export default function (config) {
   const buildStore = (results) => {
     Object.assign(store.collection, results.collection);
     results.products.forEach((product, index) => {
-      store.products.push(new Product(product));
+      const p = new Product(product);
+      store.products.push(p);
+      store.productsById[p.product_id] = p;
+
+      p.options.forEach((option) => {
+        store.optionsById[option.id] = option;
+        store.selections[option.id] = option.values[0];
+      });
     });
+
     if (typeof self.ready === 'function') {
       self.ready();
     }

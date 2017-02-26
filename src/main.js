@@ -14,6 +14,7 @@ export function build(el, config) {
   Vue.use({
     install (Vue, options) {
       Vue.prototype.$dispatcher = dispatcher;
+      Vue.prototype.$selections = store.state.selections;
     }
   });
 

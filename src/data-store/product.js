@@ -9,12 +9,12 @@ export default class Product {
     const self = this;
     // graft the raw data structure onto `this` object
     Object.assign(self, raw);
-    console.log(raw);
+
+    // TODO: Move this info to "selections"
     self.getSelectedVariant = () => {
       const variantName = self.options.map(option => option.selected).join(' / ');
       return self.variants.find(variant => variant.title === variantName);
     };
-
     self.getSelectedVariantId = () => {
       return self.getSelectedVariant().id;
     };
@@ -28,8 +28,8 @@ export default class Product {
         if (!values) {
           values = raw.options[index].values = [];
           raw.options[index].selected = optionValue; // self-select first option
-          values.push(optionValue);
-        } else if (!contains(values, optionValue)) {
+        }
+        if (!contains(values, optionValue)) {
           values.push(optionValue);
         }
       });
