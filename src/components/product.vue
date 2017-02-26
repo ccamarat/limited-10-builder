@@ -5,7 +5,7 @@
     <p v-html="product.body_html"></p>
     <product-options v-for="option in product.options" :option="option"></product-options>
     <p class="grid-link__meta">
-      Cost: {{ selectedVariant.price }}
+      Cost: {{ selectedVariantPrice }}
     </p>
   </div>
 </template>
@@ -25,8 +25,9 @@
     },
 
     computed: {
-      selectedVariant () {
-        return this.$dispatcher.getSelectedVariant(this.product);
+      selectedVariantPrice () {
+        const variant = this.$dispatcher.getSelectedVariant(this.product);
+        return (variant) ? variant.price : 'Unavailable'
       }
     }
   }

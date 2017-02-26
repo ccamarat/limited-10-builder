@@ -14,6 +14,9 @@ export function build(el, config) {
   const store = new DataStore(config, client, cache);
   const dispatcher = new Dispatcher(config, store, client);
 
+  store.ready = () => {
+    dispatcher.init();
+  };
   store.init();
 
   Vue.use({
