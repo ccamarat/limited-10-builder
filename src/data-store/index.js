@@ -8,7 +8,7 @@ const DEFAULT_STORE = {
   products: [],
   productsById: {},
   optionsById: {},
-  variantsById: {},
+  variants: [],
   linkedOptions: {},
   selections: {},
   quantity: 1
@@ -29,6 +29,8 @@ export default function (config, client, cache) {
         store.optionsById[option.id] = option;
         store.selections[option.id] = option.values[0];
       });
+
+      store.variants = store.variants.concat(p.variants)
     });
 
     store.linkedOptions = getLinkedOptions(config.products.linkedOptions, store.products)

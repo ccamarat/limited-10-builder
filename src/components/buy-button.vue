@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <span>
     <button class="btn" @click="handleClick()" :disabled="isBuying">Take my money!</button>
-  </div>
+  </span>
 </template>
 
 <script>
