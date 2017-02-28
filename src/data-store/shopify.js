@@ -18,6 +18,9 @@ export default function ShopifyClient(config) {
   };
 
   const sortProducts = () => {
+    if (!config.products.sortOrder) {
+      return;
+    }
     const sortOrder = cloneArray(config.products.sortOrder);
     const nonConfiguredProducts = cloneArray(config.products.sortOrder);
     const unsortableProducts = [];
