@@ -1,4 +1,5 @@
 import Product from "./product";
+import { getLinkedOptions } from './linked-options'
 
 const DEFAULT_STORE = {
   collection: {
@@ -8,6 +9,7 @@ const DEFAULT_STORE = {
   productsById: {},
   optionsById: {},
   variantsById: {},
+  linkedOptions: {},
   selections: {},
   quantity: 1
 };
@@ -28,6 +30,8 @@ export default function (config, client, cache) {
         store.selections[option.id] = option.values[0];
       });
     });
+
+    store.linkedOptions = getLinkedOptions(config.products.linkedOptions, store.products)
 
     if (typeof self.ready === 'function') {
       self.ready();

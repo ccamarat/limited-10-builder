@@ -3,7 +3,7 @@
     <product-thumbnail :product="product"></product-thumbnail>
     <p class="grid-link__title">{{ product.title }}</p>
     <p v-html="product.body_html"></p>
-    <product-options v-for="option in product.options" :option="option"></product-options>
+    <product-options v-if="$linkedServants.indexOf(option.id) === -1" v-for="option in product.options" :option="option"></product-options>
     <p class="grid-link__meta">
       Cost: {{ selectedVariantPrice }}
     </p>
