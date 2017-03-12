@@ -1,0 +1,22 @@
+{
+  "name": "builder",
+  "version": "0.2.0",
+  "description": "A Vue.js project",
+  "author": "Chris Camaratta <chris.camaratta@hotmail.com>",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.7.4",
+    "babel-runtime": "^6.22.0",
+    "connect": "^3.5.0",
+    "serve-static": "^1.11.2",
+    "shopify-buy": "^0.6.1",
+    "vue": "^2.1.10"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  }
+}
