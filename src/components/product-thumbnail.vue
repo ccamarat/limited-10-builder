@@ -18,7 +18,7 @@
         if (!this.product.images || this.product.images.length === 0) {
           return DEFAULT_THUMBNAIL;
         }
-        const selectedVariant = this.$dispatcher.getSelectedVariant(this.product);
+        const selectedVariant = this.$getSelectedVariant(this.product);
         if (!selectedVariant) {
           return DEFAULT_THUMBNAIL;
         }

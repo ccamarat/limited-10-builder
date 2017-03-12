@@ -2,22 +2,21 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import DataStore from './data-store'
-import Shopify from './data-store/shopify'
-import Cache from './cache'
-import { Dispatcher } from './data-store/dispatcher'
+import { Dispatcher, DataStore, ShopifyClient, Cache } from './services'
 import 'babel-polyfill'
 
 export function build (el, config) {
-  const client = new Shopify(config)
+  const client = new ShopifyClient(config)
   const cache = new Cache()
   const store = new DataStore(config, client, cache)
-  const dispatcher = new Dispatcher(config, store, client)
+  const dispatcher = new Dispatcher(store, client)
 
-  store.ready = () => {
+  store.init().then(() => {
     Vue.use({
       install (Vue, options) {
         Vue.prototype.$dispatcher = dispatcher
+        Vue.prototype.$getSelectedVariant = store.getSelectedVariant.bind(store);
+        Vue.prototype.$store = store.state
         Vue.prototype.$selections = store.state.selections
         Vue.prototype.$linkedServants = store.state.linkedOptions.servants
       }
@@ -30,7 +29,5 @@ export function build (el, config) {
       components: {App},
       data: {store}
     })
-  }
-
-  store.init()
+  });
 }

@@ -4,7 +4,7 @@ const contains = (array, optionValue) => {
   });
 };
 
-export default class Product {
+export class Product {
   constructor(raw) {
     const self = this;
     // graft the raw data structure onto `this` object

@@ -1,13 +1,13 @@
 <template>
-  <div class="custom-product grid__item medium--one-third post-large--one-third">
-    <product-thumbnail :product="product"></product-thumbnail>
-    <p class="grid-link__title">{{ product.title }}</p>
-    <p v-html="product.body_html"></p>
-    <product-options v-if="$linkedServants.indexOf(option.id) === -1" v-for="option in product.options" :option="option"></product-options>
-    <p class="grid-link__meta">
-      Cost: {{ selectedVariantPrice }}
+    <div class="custom-product grid__item medium--one-third post-large--one-third">
+        <product-thumbnail :product="product"></product-thumbnail>
+        <p class="grid-link__title">{{ product.title }}</p>
+        <p v-html="product.body_html"></p>
+        <product-options v-if="!isLinked(option)" v-for="option in product.options" :option="option"></product-options>
+        <p class="grid-link__meta">
+            Cost: {{ selectedVariantPrice }}
     </p>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -26,15 +26,20 @@
 
     computed: {
       selectedVariantPrice () {
-        const variant = this.$dispatcher.getSelectedVariant(this.product);
+        const variant = this.$getSelectedVariant(this.product);
         return (variant) ? variant.price : 'Unavailable'
+      }
+    },
+
+    methods: {
+      isLinked(option) {
+        // TODO: Restore when linking initializes values.
+        // return this.$linkedServants.indexOf(option.id) > -1;
+        return false;
       }
     }
   }
 </script>
 
 <style lang="scss">
-  .custom-product {
-
-  }
 </style>

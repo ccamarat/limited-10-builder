@@ -24,7 +24,7 @@
     computed: {
       totalPrice () {
         try {
-          const selectedVariants = this.store.state.products.map(p => this.$dispatcher.getSelectedVariant(p).price)
+          const selectedVariants = this.store.state.products.map(p => this.$getSelectedVariant(p).price)
           const total = selectedVariants.reduce((t, v) => t + Number(v), 0)
           return `$ ${total.toFixed(2)}`
         } catch (e) {
