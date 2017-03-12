@@ -3,7 +3,7 @@
 import localStorageBackend from "./localstorage-backend";
 import fallbackBackend from "./in-memory-backend";
 
-export default function (options) {
+export function Cache (options) {
   // Default options
   let backend = null;
   let preferLocalStorage = true;

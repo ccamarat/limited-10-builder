@@ -1,13 +1,13 @@
 <template>
-  <div class="custom-product grid__item medium--one-third post-large--one-third">
-    <product-thumbnail :product="product"></product-thumbnail>
-    <p class="grid-link__title">{{ product.title }}</p>
-    <p v-html="product.body_html"></p>
-    <product-options v-for="option in product.options" :option="option"></product-options>
-    <p class="grid-link__meta">
-      Cost: {{ selectedVariant.price }}
+    <div class="custom-product grid__item medium--one-third post-large--one-third">
+        <product-thumbnail :product="product"></product-thumbnail>
+        <p class="grid-link__title">{{ product.title }}</p>
+        <p v-html="product.body_html"></p>
+        <product-options v-if="!isLinked(option)" v-for="option in product.options" :option="option"></product-options>
+        <p class="grid-link__meta">
+            Cost: {{ selectedVariantPrice }}
     </p>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -25,15 +25,19 @@
     },
 
     computed: {
-      selectedVariant () {
-        return this.product.getSelectedVariant();
+      selectedVariantPrice () {
+        const variant = this.$getSelectedVariant(this.product);
+        return (variant) ? variant.price : 'Unavailable'
+      }
+    },
+
+    methods: {
+      isLinked(option) {
+        return this.$store.linkedOptions.servants.indexOf(option.id) > -1;
       }
     }
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
-  .custom-product {
-
-  }
+<style lang="scss">
 </style>

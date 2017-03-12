@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  const DEFAULT_THUMBNAIL = 'https://raw.githubusercontent.com/ccamarat/limited-10-builder/gh-pages/static/404.png';
+  const DEFAULT_THUMBNAIL = 'https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif';
   export default {
     props: {
       product: Object
@@ -18,7 +18,11 @@
         if (!this.product.images || this.product.images.length === 0) {
           return DEFAULT_THUMBNAIL;
         }
-        const selectedVariantId = this.product.getSelectedVariantId();
+        const selectedVariant = this.$getSelectedVariant(this.product);
+        if (!selectedVariant) {
+          return DEFAULT_THUMBNAIL;
+        }
+        const selectedVariantId = selectedVariant.id;
         const img = this.product.images.find(image => image.variant_ids.find(variantId => variantId === selectedVariantId));
         return img ? img.src : DEFAULT_THUMBNAIL;
       }
@@ -26,5 +30,5 @@
   };
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
 </style>

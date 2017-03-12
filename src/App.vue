@@ -3,7 +3,10 @@
     <collection :model="collection"></collection>
     <product-list :products="products"></product-list>
     <quantity-selector :store="store.state"></quantity-selector>
-    <buy-button :store="store"></buy-button>
+    <div>
+      <collection-price :store="store"></collection-price>
+      <buy-button :store="store"></buy-button>
+    </div>
   </div>
 </template>
 
@@ -12,6 +15,7 @@
   import productList from './components/product-list'
   import quantitySelector from './components/quantity-selector';
   import buyButton from './components/buy-button';
+  import collectionPrice from './components/collection-price.vue';
 
   export default {
     name: 'app',
@@ -25,7 +29,8 @@
       collection,
       productList,
       quantitySelector,
-      buyButton
+      buyButton,
+      collectionPrice
     },
 
     data () {

@@ -4,20 +4,11 @@ const contains = (array, optionValue) => {
   });
 };
 
-export default class Product {
+export class Product {
   constructor(raw) {
     const self = this;
     // graft the raw data structure onto `this` object
     Object.assign(self, raw);
-
-    self.getSelectedVariant = () => {
-      const variantName = self.options.map(option => option.selected).join(' / ');
-      return self.variants.find(variant => variant.title === variantName);
-    };
-
-    self.getSelectedVariantId = () => {
-      return self.getSelectedVariant().id;
-    };
 
     // while the raw data contains an "options" object, that object doesn't actually contain the list of values available
     // for itself. To get it, we need to iterate through the variants instead.
@@ -27,9 +18,8 @@ export default class Product {
         optionValue = optionValue.value;
         if (!values) {
           values = raw.options[index].values = [];
-          raw.options[index].selected = optionValue; // self-select first option
-          values.push(optionValue);
-        } else if (!contains(values, optionValue)) {
+        }
+        if (!contains(values, optionValue)) {
           values.push(optionValue);
         }
       });
