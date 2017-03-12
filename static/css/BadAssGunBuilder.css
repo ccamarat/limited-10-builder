@@ -8,4 +8,12 @@ html, body {
 }
 
 
+.price-wrapper[data-v-e0f0adf2] {
+  font-size: 1.5em;
+  margin-right: 20px;
+}
+.price-value[data-v-e0f0adf2] {
+  font-weight: bold;
+}
+
 /*# sourceMappingURL=BadAssGunBuilder.css.map*/
