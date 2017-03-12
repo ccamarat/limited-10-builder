@@ -1,4 +1,5 @@
 import { StateBuilder } from './StateBuilder'
+import { LinkedOptions } from './LinkedOptions'
 
 export class DataStore {
   constructor (config, client, cache) {
@@ -8,18 +9,24 @@ export class DataStore {
   }
 
   init () {
-    const stateBuilder = new StateBuilder(this.config)
+    const stateBuilder = new StateBuilder(this.config);
     const cachedState = this.cache.get('store')
+    this.linkedOptions = new LinkedOptions(this);
+
+    const sync = (state) => {
+      this.state = stateBuilder.createState(state)
+      this.linkedOptions.init(this.config.products.linkedOptions);
+    }
 
     return new Promise(resolve => {
       if (cachedState) {
-        this.state = stateBuilder.createState(cachedState)
+        sync(cachedState)
         resolve();
       } else {
         this.client.fetch()
           .then((results) => {
             this.cache.set('store', results, this.config.cacheLifetime)
-            this.state = stateBuilder.createState(results)
+            sync(results)
             resolve();
           })
       }

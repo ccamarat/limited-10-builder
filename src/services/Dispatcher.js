@@ -11,14 +11,8 @@ export class Dispatcher {
   }
 
   updateSelection (optionId, value) {
-    const linkedOptions = this.store.state.linkedOptions.controllers;
     this.store.state.selections[optionId] = value
-
-    if (linkedOptions[optionId]) {
-      linkedOptions[optionId].forEach(linkedOption => {
-        this.store.state.selections[linkedOption.id] = value
-      })
-    }
+    this.store.linkedOptions.sync(optionId);
   }
 
   addToCart () {

@@ -16,9 +16,7 @@ export function build (el, config) {
       install (Vue, options) {
         Vue.prototype.$dispatcher = dispatcher
         Vue.prototype.$getSelectedVariant = store.getSelectedVariant.bind(store);
-        Vue.prototype.$store = store.state
-        Vue.prototype.$selections = store.state.selections
-        Vue.prototype.$linkedServants = store.state.linkedOptions.servants
+        Vue.prototype.$store = store;
       }
     })
 

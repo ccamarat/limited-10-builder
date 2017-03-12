@@ -16,7 +16,7 @@
     computed: {
       selection: {
         get () {
-          return this.$selections[this.option.id];
+          return this.$store.state.selections[this.option.id];
         },
         set (value) {
           this.$dispatcher.updateSelection(this.option.id, value);

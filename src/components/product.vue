@@ -33,9 +33,7 @@
 
     methods: {
       isLinked(option) {
-        // TODO: Restore when linking initializes values.
-        // return this.$linkedServants.indexOf(option.id) > -1;
-        return false;
+        return this.$store.linkedOptions.servants.indexOf(option.id) > -1;
       }
     }
   }
