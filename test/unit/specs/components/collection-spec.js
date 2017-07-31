@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue';
 import collection from '../../../../src/components/collection';
 
 describe('collection', () => {

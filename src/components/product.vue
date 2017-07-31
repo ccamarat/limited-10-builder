@@ -27,7 +27,7 @@
     computed: {
       selectedVariantPrice () {
         const variant = this.$getSelectedVariant(this.product);
-        return (variant) ? variant.price : 'Unavailable'
+        return (variant) ? variant.price : 'Unavailable';
       }
     },
 
@@ -36,7 +36,7 @@
         return this.$store.linkedOptions.servants.indexOf(option.id) > -1;
       }
     }
-  }
+  };
 </script>
 
 <style lang="scss">

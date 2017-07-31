@@ -11,5 +11,5 @@
     props: {
       store: Object
     }
-  }
+  };
 </script>
