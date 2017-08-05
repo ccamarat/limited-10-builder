@@ -11,8 +11,8 @@
 </template>
 
 <script>
-  import collection from './components/collection'
-  import productList from './components/product-list'
+  import collection from './components/collection';
+  import productList from './components/product-list';
   import quantitySelector from './components/quantity-selector';
   import buyButton from './components/buy-button';
   import collectionPrice from './components/collection-price.vue';
@@ -37,10 +37,9 @@
       return {
         collection: this.store.state.collection,
         products: this.store.state.products
-      }
+      };
     }
-  }
-
+  };
 </script>
 
 <style>

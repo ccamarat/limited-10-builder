@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue';
 import { trigger } from '../../helpers';
 import buyButton from '../../../../src/components/buy-button';
 
@@ -15,7 +15,7 @@ describe('buy-button', () => {
 
   it('should render correct contents', () => {
     const vm = renderButton();
-    expect(vm.$el.querySelector('.btn').textContent).toBe('Take my money!')
+    expect(vm.$el.querySelector('.btn').textContent).toBe('Take my money!');
   });
 
   it('should call `addToCart` when clicked', () => {

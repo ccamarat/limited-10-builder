@@ -18,7 +18,7 @@ module.exports = {
   // add your custom rules here
   'rules': {
     // semi colons are normal!
-    'semi': 0,
+    'semi': [2, 'always'],
     // ignore quotes for now
     'quotes': 0,
     // Lame rule

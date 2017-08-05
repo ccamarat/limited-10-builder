@@ -1,6 +1,6 @@
 <template>
   <div class="grid-uniform">
-    <product v-for="product in products" :product="product"></product>
+    <product v-for="product in products" :product="product" :key="product.id"></product>
   </div>
 </template>
 
@@ -15,7 +15,7 @@
     components: {
       product
     }
-  }
+  };
 </script>
 <style lang="scss">
 </style>

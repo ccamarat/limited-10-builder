@@ -6,27 +6,27 @@
  */
 export class Dispatcher {
   constructor (store, shopifyClient) {
-    this.store = store
-    this.client = shopifyClient
+    this.store = store;
+    this.client = shopifyClient;
   }
 
   updateSelection (optionId, value) {
-    this.store.state.selections[optionId] = value
+    this.store.state.selections[optionId] = value;
     this.store.linkedOptions.sync(optionId);
   }
 
   addToCart () {
-    const selections = this.store.state.products.map(product => this.store.getSelectedVariant(product))
+    const selections = this.store.state.products.map(product => this.store.getSelectedVariant(product));
     return this.client.addToCart(selections, this.store.state.quantity)
       .then(cart => {
         if (window.parent !== window) {
           window.parent.postMessage({
             message: 'order-complete',
             checkoutUrl: cart.checkoutUrl
-          }, '*')
+          }, '*');
         } else {
-          window.location = cart.checkoutUrl
+          window.location = cart.checkoutUrl;
         }
-      })
+      });
   }
 }

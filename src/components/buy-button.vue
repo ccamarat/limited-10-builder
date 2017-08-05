@@ -22,5 +22,5 @@
         this.store.addToCart();
       }
     }
-  }
+  };
 </script>

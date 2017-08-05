@@ -11,5 +11,5 @@
     props: {
       model: Object
     }
-  }
+  };
 </script>
