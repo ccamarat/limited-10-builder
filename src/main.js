@@ -1,7 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
-import App from './App';
+import App from './App.vue';
 import { Dispatcher, DataStore, ShopifyClient, Cache } from './services';
 import 'babel-polyfill';
 
@@ -12,6 +12,8 @@ export function build (el, config) {
   const dispatcher = new Dispatcher(store, client);
 
   store.init().then(() => {
+    Vue.config.productionTip = false;
+
     Vue.use({
       install (Vue, options) {
         Vue.prototype.$dispatcher = dispatcher;
