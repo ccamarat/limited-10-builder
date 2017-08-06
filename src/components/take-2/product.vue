@@ -2,9 +2,9 @@
   <li @click="showThisProduct">
     {{product.title}}
     <div v-if="optionsAreVisible" @click.stop>
-      <product-options v-for="option in product.options"
-                       v-if="!isLinked(option)"
+      <product-options v-for="option in unlinkedOptions"
                        :option="option"
+                       :hide-header="unlinkedOptions.length === 1"
                        :key="option.id">
       </product-options>
     </div>
@@ -30,6 +30,11 @@
 
       // Background shouldn't bleed through
       background: $color-white;
+
+      // ppp
+      padding: 5px;
+      border: 1px solid $color-green;
+      border-radius: 5px;
     }
   }
 </style>
@@ -60,6 +65,11 @@
       },
       optionsAreVisible () {
         return this.uiState.visibleProductId === this.product.product_id;
+      },
+      unlinkedOptions () {
+        return this.product.options.filter((option) => {
+          return this.$store.linkedOptions.servants.indexOf(option.id) === -1;
+        });
       }
     },
 

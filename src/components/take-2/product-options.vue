@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>{{ option.name }}</h3>
+    <h3 v-if="!hideHeader">{{ option.name }}</h3>
     <ul>
       <li v-for="value in option.values"
           :key="value"
@@ -16,6 +16,12 @@
   @import './styling/variables';
   @import './styling/list-button.scss';
 
+  h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+    text-decoration: underline;
+  }
+
   li {
     @extend %list-button;
   }
@@ -29,7 +35,8 @@
 <script>
   export default {
     props: {
-      option: Object
+      option: Object,
+      hideHeader: Boolean
     },
 
     computed: {
