@@ -1,8 +1,10 @@
 <template>
-  <div id="app" class="grid__item">
-    <collection :model="collection"></collection>
-    <product-list :products="products"></product-list>
-    <quantity-selector :store="store.state"></quantity-selector>
+  <div>
+    <div class="grid-uniform grid-link__container">
+      <product-list class="grid__item large--one-fifth medium-down--one-half" :products="products"></product-list>
+      <div class="grid__item large--four-fifths medium-down--one-half">Stuff goes here</div>
+    </div>
+
     <div>
       <collection-price :store="store"></collection-price>
       <buy-button :store="store"></buy-button>
@@ -11,9 +13,7 @@
 </template>
 
 <script>
-  import collection from './components/collection';
-  import productList from './components/product-list';
-  import quantitySelector from './components/quantity-selector';
+  import productList from './components/take-2/product-list';
   import buyButton from './components/buy-button';
   import collectionPrice from './components/collection-price.vue';
 
@@ -25,10 +25,9 @@
         required: true
       }
     },
+
     components: {
-      collection,
       productList,
-      quantitySelector,
       buyButton,
       collectionPrice
     },
@@ -42,14 +41,5 @@
   };
 </script>
 
-<style>
-  html, body {
-    font-family: Helvetica, sans-serif;
-    font-size: 14px;
-  }
-
-  #app {
-    margin-top: 10px;
-  }
-
+<style lang="scss" scoped>
 </style>
