@@ -1,13 +1,24 @@
 <template>
-  <span class="grid-link__image grid-link__image--product">
-    <span class="grid-link__image-centered">
-      <img :src="selectedVariantImage"/>
-    </span>
+  <span class="pi">
+    <img :src="selectedVariantImage"/>
   </span>
 </template>
 
+<style lang="scss">
+  .pi {
+    display: flex;
+    width: 200px;
+  }
+
+  img {
+    min-width: 200px;
+    max-height: 200px;
+  }
+</style>
+
 <script>
   const DEFAULT_THUMBNAIL = 'https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif';
+
   export default {
     props: {
       product: Object
@@ -29,6 +40,3 @@
     }
   };
 </script>
-
-<style lang="scss">
-</style>

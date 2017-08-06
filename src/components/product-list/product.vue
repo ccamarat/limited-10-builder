@@ -59,13 +59,10 @@
     },
 
     computed: {
-      selectedVariantPrice () {
-        const variant = this.$getSelectedVariant(this.product);
-        return (variant) ? variant.price : 'Unavailable';
-      },
       optionsAreVisible () {
         return this.uiState.visibleProductId === this.product.product_id;
       },
+
       unlinkedOptions () {
         return this.product.options.filter((option) => {
           return this.$store.linkedOptions.servants.indexOf(option.id) === -1;
@@ -74,9 +71,6 @@
     },
 
     methods: {
-      isLinked(option) {
-        return this.$store.linkedOptions.servants.indexOf(option.id) > -1;
-      },
       showThisProduct () {
         this.$uiStore.showProduct(this.product);
       }

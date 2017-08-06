@@ -2,7 +2,7 @@
   <div>
     <div class="grid-uniform grid-link__container">
       <product-list class="grid__item large--one-fifth medium-down--one-half" :products="products"></product-list>
-      <div class="grid__item large--four-fifths medium-down--one-half">Stuff goes here</div>
+      <viewer class="grid__item large--four-fifths medium-down--one-half" :products="products"></viewer>
     </div>
 
     <div>
@@ -13,9 +13,10 @@
 </template>
 
 <script>
-  import productList from './components/take-2/product-list';
-  import buyButton from './components/buy-button';
-  import collectionPrice from './components/collection-price.vue';
+  import ProductList from './components/product-list/product-list.vue';
+  import BuyButton from './components/buy-button.vue';
+  import CollectionPrice from './components/collection-price.vue';
+  import Viewer from './components/viewer/viewer.vue';
 
   export default {
     name: 'app',
@@ -27,9 +28,10 @@
     },
 
     components: {
-      productList,
-      buyButton,
-      collectionPrice
+      ProductList,
+      BuyButton,
+      CollectionPrice,
+      Viewer
     },
 
     data () {
