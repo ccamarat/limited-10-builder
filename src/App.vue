@@ -1,8 +1,10 @@
 <template>
-  <div id="app" class="grid__item">
-    <collection :model="collection"></collection>
-    <product-list :products="products"></product-list>
-    <quantity-selector :store="store.state"></quantity-selector>
+  <div>
+    <div class="grid-uniform grid-link__container">
+      <product-list class="grid__item large--one-fifth medium-down--one-half" :products="products"></product-list>
+      <viewer class="grid__item large--four-fifths medium-down--one-half" :products="products"></viewer>
+    </div>
+
     <div>
       <collection-price :store="store"></collection-price>
       <buy-button :store="store"></buy-button>
@@ -11,11 +13,10 @@
 </template>
 
 <script>
-  import collection from './components/collection';
-  import productList from './components/product-list';
-  import quantitySelector from './components/quantity-selector';
-  import buyButton from './components/buy-button';
-  import collectionPrice from './components/collection-price.vue';
+  import ProductList from './components/product-list/product-list.vue';
+  import BuyButton from './components/buy-button.vue';
+  import CollectionPrice from './components/collection-price.vue';
+  import Viewer from './components/viewer/viewer.vue';
 
   export default {
     name: 'app',
@@ -25,12 +26,12 @@
         required: true
       }
     },
+
     components: {
-      collection,
-      productList,
-      quantitySelector,
-      buyButton,
-      collectionPrice
+      ProductList,
+      BuyButton,
+      CollectionPrice,
+      Viewer
     },
 
     data () {
@@ -42,14 +43,5 @@
   };
 </script>
 
-<style>
-  html, body {
-    font-family: Helvetica, sans-serif;
-    font-size: 14px;
-  }
-
-  #app {
-    margin-top: 10px;
-  }
-
+<style lang="scss" scoped>
 </style>

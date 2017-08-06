@@ -1,0 +1,18 @@
+@import './variables';
+
+%list-button {
+  border: 1px solid $color-grey;
+  padding: 4px;
+  cursor: pointer;
+
+  .active {
+    background: $color-green;
+    color: $color-white;
+  }
+
+  &:hover {
+    background: lighten($color-green, 10%);
+    border: 1px solid darken($color-green, 10%);
+    color: $color-white;
+  }
+}

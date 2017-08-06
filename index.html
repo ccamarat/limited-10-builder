@@ -3,18 +3,477 @@
 <head>
   <meta charset="utf-8">
   <title>builder</title>
-  <link href="//cdn.shopify.com/s/files/1/1143/6284/t/3/assets/timber.scss.css?9899783939290997664" rel="stylesheet"
-        type="text/css" media="all">
-  <link href="//cdn.shopify.com/s/files/1/1143/6284/t/3/assets/theme.scss.css?9899783939290997664" rel="stylesheet"
-        type="text/css" media="all">
+  <link href="//cdn.shopify.com/s/files/1/1143/6284/t/3/assets/timber.scss.css?8086177791423242125" rel="stylesheet" type="text/css" media="all">
+  <link href="//cdn.shopify.com/s/files/1/1143/6284/t/3/assets/theme.scss.css?8086177791423242125" rel="stylesheet" type="text/css" media="all">
   <link href="//fonts.googleapis.com/css?family=Asap:400" rel="stylesheet" type="text/css" media="all">
 </head>
-<body>
-<div class="wrapper main-content">
-  <div class="grid">
-	<div id="app"></div>
+<body class="template-product">
+<div class="header-bar">
+  <div class="wrapper medium-down--hide">
+    <div class="post-large--display-table">
+      <div class="header-bar__left post-large--display-table-cell">
+        <div class="header-bar__module header-bar__message">
+          Limited-10 - 07 FFL
+        </div>
+      </div>
+      <div class="header-bar__right post-large--display-table-cell">
+        <ul class="header-bar__module header-bar__module--list">
+          <li>
+            <a href="/account/register" id="customer_register_link">Sign up | </a>
+            <a href="/account/login" id="customer_login_link">Log in</a>
+          </li>
+        </ul>
+        <div class="header-bar__module">
+          <span class="header-bar__sep" aria-hidden="true"></span>
+          <a href="/cart" class="cart-page-link">
+            <span class="icon icon-cart header-bar__cart-icon" aria-hidden="true"></span>
+          </a>
+        </div>
+        <div class="header-bar__module">
+          <a href="/cart" class="cart-page-link">
+            Cart
+            <span class="cart-count header-bar__cart-count hidden-count">0</span>
+          </a>
+        </div>
+        <div class="header-bar__module header-bar__search">
+          <form action="/search" method="get" class="header-bar__search-form clearfix" role="search">
+
+            <button type="submit" class="btn icon-fallback-text header-bar__search-submit">
+              <span class="icon icon-search" aria-hidden="true"></span>
+              <span class="fallback-text">Search</span>
+            </button>
+            <input type="search" name="q" value="" aria-label="Search" class="header-bar__search-input" placeholder="Search">
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="wrapper post-large--hide">
+    <button type="button" class="mobile-nav-trigger" id="MobileNavTrigger">
+      <span class="icon icon-hamburger" aria-hidden="true"></span>
+      Menu
+    </button>
+    <a href="/cart" class="cart-page-link mobile-cart-page-link">
+      <span class="icon icon-cart header-bar__cart-icon" aria-hidden="true"></span>
+      Cart <span class="cart-count hidden-count">0</span>
+    </a>
+  </div>
+  <ul id="MobileNav" class="mobile-nav post-large--hide">
+    <li class="mobile-nav__link" aria-haspopup="true">
+      <a href="/" class="mobile-nav">
+        Home
+      </a>
+    </li>
+    <li class="mobile-nav__link" aria-haspopup="true">
+      <a href="/collections/all" class="mobile-nav__sublist-trigger">
+        Catalog
+        <span class="icon-fallback-text mobile-nav__sublist-expand">
+  <span class="icon icon-plus" aria-hidden="true"></span>
+  <span class="fallback-text">+</span>
+</span>
+        <span class="icon-fallback-text mobile-nav__sublist-contract">
+  <span class="icon icon-minus" aria-hidden="true"></span>
+  <span class="fallback-text">-</span>
+</span>
+      </a>
+      <ul class="mobile-nav__sublist">
+
+        <li class="mobile-nav__sublist-link">
+          <a href="/collections/frontpage">All Products</a>
+        </li>
+
+        <li class="mobile-nav__sublist-link">
+          <a href="/collections/80-frames">80% Frames</a>
+        </li>
+
+        <li class="mobile-nav__sublist-link">
+          <a href="/collections/100-frames-ffl-transfer-only">100% Frames</a>
+        </li>
+
+        <li class="mobile-nav__sublist-link">
+          <a href="/collections/parts-accessories">Parts</a>
+        </li>
+
+        <li class="mobile-nav__sublist-link">
+          <a href="/collections/tools">Tools &amp; Packages</a>
+        </li>
+
+      </ul>
+
+    </li>
+
+
+    <li class="mobile-nav__link" aria-haspopup="true">
+
+      <a href="/pages/about-us" class="mobile-nav">
+        About us
+      </a>
+
+    </li>
+
+
+    <li class="mobile-nav__link" aria-haspopup="true">
+
+      <a href="/pages/faq" class="mobile-nav">
+        FAQ
+      </a>
+
+    </li>
+
+
+    <li class="mobile-nav__link" aria-haspopup="true">
+
+      <a href="/pages/contact-us" class="mobile-nav">
+        Contact Us
+      </a>
+
+    </li>
+
+
+
+
+    <li class="mobile-nav__link">
+      <a href="/account/login" id="customer_login_link">Log in</a>
+    </li>
+
+    <li class="mobile-nav__link">
+      <a href="/account/register" id="customer_register_link">Create account</a>
+    </li>
+
+
+
+
+    <li class="mobile-nav__link">
+
+      <div class="header-bar__module header-bar__search">
+
+
+
+        <form action="/search" method="get" class="header-bar__search-form clearfix" role="search">
+
+          <button type="submit" class="btn icon-fallback-text header-bar__search-submit">
+            <span class="icon icon-search" aria-hidden="true"></span>
+            <span class="fallback-text">Search</span>
+          </button>
+          <input type="search" name="q" value="" aria-label="Search" class="header-bar__search-input" placeholder="Search">
+        </form>
+
+
+      </div>
+
+    </li>
+
+  </ul>
 </div>
+<header class="site-header" role="banner">
+  <div class="wrapper">
+
+
+
+    <div class="grid--full">
+      <div class="grid__item">
+
+        <div class="h1 site-header__logo" itemscope="" itemtype="http://schema.org/Organization">
+
+
+          <a href="/" itemprop="url">
+            <img src="//cdn.shopify.com/s/files/1/1143/6284/t/3/assets/logo.png?8086177791423242125" alt="L10-Machine" itemprop="logo">
+          </a>
+
+
+        </div>
+
+
+        <p class="header-message post-large--hide">
+          <small>Limited-10 - 07 FFL</small>
+        </p>
+
+      </div>
+    </div>
+    <div class="grid--full medium-down--hide">
+      <div class="grid__item">
+
+        <ul class="site-nav" id="AccessibleNav">
+
+
+
+
+          <li>
+            <a href="/" class="site-nav__link">Home</a>
+          </li>
+
+
+
+
+
+          <li class="site-nav--has-dropdown" aria-haspopup="true">
+            <a href="/collections/all" class="site-nav__link">
+              Catalog
+              <span class="icon-fallback-text">
+            <span class="icon icon-arrow-down" aria-hidden="true"></span>
+          </span>
+            </a>
+            <ul class="site-nav__dropdown">
+
+              <li class="site-nav--active">
+                <a href="/collections/frontpage" class="site-nav__link">All Products</a>
+              </li>
+
+              <li>
+                <a href="/collections/80-frames" class="site-nav__link">80% Frames</a>
+              </li>
+
+              <li>
+                <a href="/collections/100-frames-ffl-transfer-only" class="site-nav__link">100% Frames</a>
+              </li>
+
+              <li>
+                <a href="/collections/parts-accessories" class="site-nav__link">Parts</a>
+              </li>
+
+              <li>
+                <a href="/collections/tools" class="site-nav__link">Tools &amp; Packages</a>
+              </li>
+
+            </ul>
+          </li>
+
+
+
+
+
+          <li>
+            <a href="/pages/about-us" class="site-nav__link">About us</a>
+          </li>
+
+
+
+
+
+          <li>
+            <a href="/pages/faq" class="site-nav__link">FAQ</a>
+          </li>
+
+
+
+
+
+          <li>
+            <a href="/pages/contact-us" class="site-nav__link">Contact Us</a>
+          </li>
+
+
+        </ul>
+
+      </div>
+    </div>
+
+
+
+  </div>
+</header>
+<main class="wrapper main-content" role="main">
+  <div class="grid">
+    <div class="grid__item">
+      <div itemscope="" itemtype="http://schema.org/Product">
+        <div class="section-header section-header--breadcrumb">
+
+
+          <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+            <a href="/" title="Back to the frontpage">Home</a>
+
+
+
+
+            <span aria-hidden="true" class="breadcrumb__sep">›</span>
+
+
+            <a href="/collections/frontpage" title="">Home page</a>
+
+
+            <span aria-hidden="true" class="breadcrumb__sep">›</span>
+            <span>Badass Gun Builder</span>
+          </nav>
+        </div>
+
+        <div class="product-single">
+          <div id="app"></div>
+        </div>
+
+        <hr class="hr--clear hr--small">
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer small--text-center" role="contentinfo">
+
+  <div class="wrapper">
+
+    <div class="grid-uniform ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="grid__item post-large--one-quarter medium--one-half site-footer__links">
+        <h4><a href="/blogs/news">Latest News</a></h4>
+
+        <p class="h5"><a title=""></a></p>
+
+
+        <p></p>
+
+      </div>
+
+
+
+      <div class="grid__item post-large--one-quarter medium--one-half">
+
+        <h4>Quick Links</h4>
+
+        <ul class="site-footer__links">
+
+          <li><a href="/pages/shipping-and-returns">Shipping and Returns</a></li>
+
+          <li><a href="/search">Search</a></li>
+
+          <li><a href="/pages/shipping-and-returns">About us</a></li>
+
+          <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+
+          <li><a href="/pages/terms-and-conditions">Terms and Conditions</a></li>
+
+        </ul>
+      </div>
+
+
+
+
+
+      <div class="grid__item post-large--one-quarter medium--one-half">
+        <h4>Follow Us</h4>
+
+        <ul class="inline-list social-icons">
+
+
+          <li>
+            <a class="icon-fallback-text" href="https://www.facebook.com/l10machine" title="L10-Machine on Facebook">
+              <span class="icon icon-facebook" aria-hidden="true"></span>
+              <span class="fallback-text">Facebook</span>
+            </a>
+          </li>
+
+
+
+
+          <li>
+            <a class="icon-fallback-text" href="https://instagram.com/l10_machine" title="L10-Machine on Instagram">
+              <span class="icon icon-instagram" aria-hidden="true"></span>
+              <span class="fallback-text">Instagram</span>
+            </a>
+          </li>
+
+
+
+
+
+
+        </ul>
+
+      </div>
+
+
+
+
+
+      <div class="grid__item post-large--one-quarter medium--one-half">
+        <h4>Newsletter</h4>
+        <p>Sign up for the latest news, offers and styles</p>
+
+
+        <div class="form-vertical small--hide">
+          <form method="post" action="https://www.l10-machine.com/contact#contact_form" id="contact_form" class="contact-form" accept-charset="UTF-8"><input type="hidden" value="customer" name="form_type"><input type="hidden" name="utf8" value="✓">
+
+
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input type="email" value="" placeholder="Your email" name="contact[email]" id="Email" class="input-group-field" aria-label="Your email" autocorrect="off" autocapitalize="off">
+            <input type="submit" class="btn" name="subscribe" id="subscribe" value="Subscribe">
+
+          </form>
+        </div>
+        <div class="form-vertical post-large--hide large--hide medium--hide">
+          <form method="post" action="https://www.l10-machine.com/contact#contact_form" id="contact_form" class="contact-form" accept-charset="UTF-8"><input type="hidden" value="customer" name="form_type"><input type="hidden" name="utf8" value="✓">
+
+
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="input-group">
+              <input type="email" value="" placeholder="Your email" name="contact[email]" id="Email" class="input-group-field" aria-label="Your email" autocorrect="off" autocapitalize="off">
+              <span class="input-group-btn">
+            <button type="submit" class="btn" name="commit" id="subscribe">Subscribe</button>
+          </span>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+
+    <hr class="hr--small hr--clear">
+
+    <div class="grid">
+      <div class="grid__item text-center">
+        <p class="site-footer__links">Copyright © 2017, <a href="/" title="">L10-Machine</a>.</p>
+      </div>
+    </div>
+
+
+
+    <div class="grid">
+      <div class="grid__item text-center">
+        <ul class="inline-list payment-icons">
+
+          <li>
+                   <span class="icon-fallback-text">
+                     <span class="icon icon-discover" aria-hidden="true"></span>
+                     <span class="fallback-text">discover</span>
+                   </span>
+          </li>
+
+          <li>
+                   <span class="icon-fallback-text">
+                     <span class="icon icon-master" aria-hidden="true"></span>
+                     <span class="fallback-text">master</span>
+                   </span>
+          </li>
+
+          <li>
+                   <span class="icon-fallback-text">
+                     <span class="icon icon-visa" aria-hidden="true"></span>
+                     <span class="fallback-text">visa</span>
+                   </span>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+
+
+  </div>
+
+</footer>
+
 <!-- script src="http://sdks.shopifycdn.com/js-buy-sdk/latest/shopify-buy.polyfilled.globals.min.js"></script -->
 <!-- built files will be auto injected -->
 <script>
@@ -42,6 +501,17 @@
         'Front Sight',
         'Rear Sight',
         'Mag Button'];
+
+      sortOrder = [
+        'Slide',
+        'Frame',
+        'Mainspring',
+        'Grip',
+        'Magwell'
+      ];
+
+      linkedOptions = {};
+
       var testConfig = {
         client: {
           accessToken: 'cccc9170b9d1911d095a199a51df92d4',
@@ -49,11 +519,12 @@
           appId: '6'
         },
         collection: {
-          id: 221262849
+          // id: 221262849
+          id: 441672653
         },
         products: {
-          sortOrder,
-          linkedOptions
+          sortOrder: sortOrder,
+          linkedOptions: linkedOptions
         },
         collectionId: 221262849,
         cacheLifetime: 24 * 3600 * 1000 // 0 = unlimited
