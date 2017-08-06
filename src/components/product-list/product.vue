@@ -1,5 +1,5 @@
 <template>
-  <li @click="showThisProduct">
+  <li @click="showThisProduct" :class="{'has-options': hasAvailableOptions}">
     {{product.title}}
     <div v-if="optionsAreVisible" @click.stop>
       <product-options v-for="option in unlinkedOptions"
@@ -19,6 +19,12 @@
     @extend %list-button;
 
     position: relative;
+
+    &.has-options:after {
+      content: '\25B6';
+      position: absolute;
+      right: 5px;
+    }
 
     > div {
       margin-left: 80%;
@@ -59,8 +65,12 @@
     },
 
     computed: {
+      hasAvailableOptions () {
+        return !(this.product.variants.length === 1 && this.product.variants[0].option_values.length === 1);
+      },
+
       optionsAreVisible () {
-        return this.uiState.visibleProductId === this.product.product_id;
+        return this.hasAvailableOptions && this.uiState.visibleProductId === this.product.product_id;
       },
 
       unlinkedOptions () {

@@ -6,9 +6,8 @@
 
 <style lang="scss" scoped>
   .container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
+    position: relative;
+    height: 420px;
   }
 </style>
 
