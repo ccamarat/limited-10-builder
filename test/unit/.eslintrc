@@ -1,8 +1,9 @@
 {
   "env": {
-    "jasmine": true
+    "mocha": true
   },
   "globals": {
-    "expect": true
+    "expect": true,
+    "sinon": true
   }
 }

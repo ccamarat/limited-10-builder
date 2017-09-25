@@ -1,33 +1,24 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
-import App from './App.vue';
-import { Dispatcher, DataStore, ShopifyClient, Cache } from './services';
-import 'babel-polyfill';
+import App from './components/App.vue';
+import Vuex from 'vuex';
+import { createStore } from './stores/store';
+import { CurrencyFilter } from './services/CurrencyFilter';
+import * as config from './sample-config';
+import { ShopifyClient } from './services/ShopifyClient';
 
-export function build (el, config) {
-  const client = new ShopifyClient(config);
-  const cache = new Cache();
-  const store = new DataStore(config, client, cache);
-  const dispatcher = new Dispatcher(store, client);
+Vue.config.productionTip = false;
 
-  store.init().then(() => {
-    Vue.config.productionTip = false;
+Vue.use(Vuex);
+Vue.use(CurrencyFilter);
 
-    Vue.use({
-      install (Vue, options) {
-        Vue.prototype.$dispatcher = dispatcher;
-        Vue.prototype.$getSelectedVariant = store.getSelectedVariant.bind(store);
-        Vue.prototype.$store = store;
-      }
-    });
+const client = new ShopifyClient(config.shopify);
 
-    /* eslint-disable no-new */
-    new Vue({
-      el,
-      template: '<App :store="store"></App>',
-      components: {App},
-      data: {store}
-    });
-  });
-}
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  template: '<App/>',
+  components: {App},
+  store: createStore(config, client)
+});

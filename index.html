@@ -1,82 +1,37 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>builder</title>
-  <link href="//cdn.shopify.com/s/files/1/1143/6284/t/3/assets/timber.scss.css?9899783939290997664" rel="stylesheet"
-        type="text/css" media="all">
-  <link href="//cdn.shopify.com/s/files/1/1143/6284/t/3/assets/theme.scss.css?9899783939290997664" rel="stylesheet"
-        type="text/css" media="all">
-  <link href="//fonts.googleapis.com/css?family=Asap:400" rel="stylesheet" type="text/css" media="all">
-</head>
-<body>
-<div class="wrapper main-content">
-  <div class="grid">
-	<div id="app"></div>
-  </div>
-</div>
-<!-- script src="http://sdks.shopifycdn.com/js-buy-sdk/latest/shopify-buy.polyfilled.globals.min.js"></script -->
-<!-- built files will be auto injected -->
-<script>
-  !function () {
-    document.addEventListener("DOMContentLoaded", function () {
-      var linkedOptions = {
-        'Length.Length': ['Frame.Length', 'Barrel.Length', 'Slide.Length']
-      };
-      var sortOrder = [
-        'Frame',
-        'Length',
-        'Configuration',
-        'Barrel',
-        'Performance Options',
-        'Slide',
-        'Grip',
-        'Magwell',
-        'Trigger',
-        'Hammer',
-        'Sear',
-        'Disconnector',
-        'Thumb Safety',
-        'Grip Safety',
-        'Slide Stop',
-        'Front Sight',
-        'Rear Sight',
-        'Mag Button'];
-      var testConfig = {
-        client: {
-          accessToken: 'cccc9170b9d1911d095a199a51df92d4',
-          domain: 'rails-test-42.myshopify.com',
-          appId: '6'
-        },
-        collection: {
-          id: 221262849
-        },
-        products: {
-          sortOrder,
-          linkedOptions
-        },
-        collectionId: 221262849,
-        cacheLifetime: 24 * 3600 * 1000 // 0 = unlimited
-      };
-      var prodConfig = {
-        client: {
-          accessToken: '1b69ce14bebfed248f488343efe88a8a',
-          domain: 'limitedten',
-          appId: '6'
-        },
-        collection: {
-          id: 175354177
-        },
-        products: {
-          sortOrder,
-          linkedOptions
-        },
-        cacheLifetime: 0 // 0 = unlimited
-      };
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>l10-pwa</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-16x16.png">
+    <!--[if IE]><link rel="shortcut icon" href="/static/img/icons/favicon.ico"><![endif]-->
+    <!-- Add to home screen for Android and modern mobile browsers -->
+    <link rel="manifest" href="<%= htmlWebpackPlugin.files.publicPath %>static/manifest.json">
+    <meta name="theme-color" content="#4DBA87">
 
-      window.bagb.build('#app', testConfig);
-    });
-  }();
-</script>
-</body>
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="l10-pwa">
+    <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/apple-touch-icon-152x152.png">
+    <!-- Add to home screen for Windows -->
+    <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    <% for (var chunk of webpack.chunks) {
+        for (var file of chunk.files) {
+          if (file.match(/\.(js|css)$/)) { %>
+    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+  </head>
+  <body>
+    <noscript>
+      This is your fallback content in case JavaScript fails to load.
+    </noscript>
+    <div id="app"></div>
+    <!-- Todo: only include in production -->
+    <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
+    <!-- built files will be auto injected -->
+  </body>
 </html>
