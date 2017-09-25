@@ -1,6 +1,7 @@
 .DS_Store
 node_modules/
-dist/
+# Keep dist visible for git subtree / heroku
+# dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
