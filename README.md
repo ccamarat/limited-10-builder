@@ -1,12 +1,8 @@
-# builder
+# l10-pwa
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/logan-engineering/limited-10-builder.svg)](https://greenkeeper.io/)
-
-> A Vue.js project, customized for The Jigganaut.
+> Jiggas BadAss Gun Builder
 
 ## Build Setup
-
-Install [Node JS](https://nodejs.org/en/)
 
 ``` bash
 # install dependencies
@@ -23,9 +19,6 @@ npm run build --report
 
 # run unit tests
 npm run unit
-
-# run e2e tests
-npm run e2e
 
 # run all tests
 npm test
