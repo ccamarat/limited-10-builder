@@ -1,4 +1,4 @@
-import { findCartItem, addProduct } from './modules/cart';
+import { findCartItem, addProductDefault } from './modules/cart';
 import * as types from './mutation-types';
 
 let constraints = [];
@@ -19,10 +19,11 @@ export const actions = {
       console.warn('option is enabled; nothing changing. Should not be here');
       return;
     }
+
     const {existing} = findCartItem(option.product, state.cart);
     const found = existing && existing.values.find(i => i.value === option.value);
     if (found) {
-      addProduct(dispatch, found.product);
+      addProductDefault(dispatch, found.product);
     }
   }
 };
@@ -107,7 +108,7 @@ function createCheckFn (rule) {
     return (option) => option.value > rule.greaterThan;
   }
 
-  console.warn(`could not create check function for "${rule}"`);
+  console.warn(`could not create check function for "${JSON.stringify(rule)}"`);
 }
 
 function findPeer (products, source) {

@@ -1,6 +1,6 @@
 import * as types from './mutation-types';
 import { getFullProductTitle } from '../services/cartUtil';
-import { addProduct } from './modules/cart';
+import { addProductDefault } from './modules/cart';
 
 import { actions } from './constraints';
 
@@ -37,6 +37,6 @@ export const updateSyncdItems = ({dispatch, state}, {title, selection}) => {
 
 export const addDefaultItemsToCart = ({dispatch, state}) => {
   state.products.variations.forEach(item => {
-    addProduct(dispatch, item.variation);
+    addProductDefault(dispatch, item.variation);
   });
 };

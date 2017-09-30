@@ -87,7 +87,7 @@ export function setValue(item, value, config) {
   }
 }
 
-export function addProduct (dispatch, product) {
+export function addProductDefault (dispatch, product) {
   const enabledValues = getDefaultEnabledValues(product);
   if (enabledValues.length === 0 && product.options.length > 0) {
     console.warn(`Could not set default value on product ${product.title}. The requested value does not exist.`);
