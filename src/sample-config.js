@@ -1,8 +1,8 @@
 export const products = [
   {
     title: 'Caliber',
-    options: ['9mm', '.38 SC', '.40', '10mm', '.45'],
-    default: '.40'
+    options: ['9mm', '9x23', '.38 SC', '.40', '10mm', '.45'],
+    default: '9mm' // uncompensated '.40'
   },
   {
     title: 'Top End Options',
@@ -24,6 +24,13 @@ export const products = [
               is: true
             },
             disable: ['Bushing', 'Sightblock']
+          },
+          {
+            when: {
+              source: 'Top End Options.Compensated',
+              is: false
+            },
+            disable: ['Standard']
           }
         ]
       },
@@ -172,30 +179,37 @@ export const products = [
       {
         title: 'Length',
         options: ['Full-Size', 'Compact'],
-        default: 'Full-Size',
-        // I'm not entirely sure how to interpret the magwell/grip length constraints Is it basically, "when length
-        // is full-size, disable compact, and when it's compact, disable full-size?"
-        constraints: [
-          {
-            when: {
-              source: 'Magwell',
-              in: ['Compact', 'None']
-            },
-            disable: ['Full-Size']
-          }
-        ]
+        default: 'Full-Size'
       },
       {
         title: 'Grip Texture',
         options: ['WarDrum Medium', 'WarDrum Velvet', 'Signature Aggressive', 'Signature Blank', 'Signature Medium'],
-        default: 'Signature Blank'
+        default: 'Signature Blank',
+        constraints: [
+          {
+            when: {
+              source: 'Grip Options.Material',
+              is: 'Polymer'
+            },
+            enable: ['WarDrum Medium', 'WarDrum Velvet']
+          }
+        ]
       }
     ]
   },
   {
     title: 'Magwell',
     options: ['Competition', 'Compact', 'None'],
-    default: 'Competition'
+    default: 'Competition',
+    constraints: [
+      {
+        when: {
+          source: 'Grip Options.Length',
+          is: 'Compact'
+        },
+        disable: 'Competition'
+      }
+    ]
   },
   {
     title: 'Thumb Safety',
@@ -228,7 +242,7 @@ export const products = [
   {
     title: 'Sights',
     options: ['Tritium Novak', 'Adjustable Bomar w/ Fiber Front', 'RTS2', 'RMR w/ Tritium'],
-    default: 'Adjustable Bomar w/ Fiber Front'
+    default: 'RTS2' // uncompensated: 'Adjustable Bomar w/ Fiber Front'
   },
   {
     title: 'Slide Racker',

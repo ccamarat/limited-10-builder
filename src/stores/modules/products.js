@@ -73,7 +73,7 @@ export function getDefaultEnabledValues (product) {
   // Otherwise, hunt away!
   const val = product.config.default;
 
-  if (!val) {
+  if (val === undefined) {
     // Product has no default; returning first available.
     return [enabledOptions[0]];
   }
