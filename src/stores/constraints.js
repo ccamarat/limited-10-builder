@@ -1,15 +1,15 @@
 import { MUTATIONS } from './products';
+import { findPeer } from './util';
 
 let constraints = [];
 
 export function configureConstraints ({tree, variations}) {
-  variations
-    .forEach(v => {
-      if (v.config.constraints) {
-        const c = v.config.constraints.map(createConstraint.bind(null, v, tree));
-        constraints.push(...c);
-      }
-    });
+  variations.forEach(v => {
+    if (v.config.constraints) {
+      const c = v.config.constraints.map(createConstraint.bind(null, v, tree));
+      constraints.push(...c);
+    }
+  });
 }
 
 export function evaluateConstraints () {
@@ -57,18 +57,6 @@ function createCheckFn (rule) {
   }
 
   console.warn(`could not create check function for "${JSON.stringify(rule)}"`);
-}
-
-function findPeer (products, source) {
-  const [needle, ...rest] = source.split('.');
-  let product = products.find(p => p.title === needle);
-
-  if (!product || (rest.length && !product.variations)) {
-    console.warn(`Could not locate peer for "${source}"; possible misconfiguration`);
-  } else if (rest.length && product.variations) {
-    product = findPeer(product.variations, rest.join('.'));
-  }
-  return product;
 }
 
 function findTargets (options, rule) {

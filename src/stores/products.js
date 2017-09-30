@@ -1,14 +1,17 @@
 import { configureProducts, retrieveProducts } from './product-init';
 import { configureConstraints, evaluateConstraints } from './constraints';
+import { configureLinkedProducts, updateLinkedProducts } from './linked-products';
 import { configureDefaults, getEnabledDefaults, selectDefaults } from './defaults';
 
 export const ACTIONS = {
   GET_ALL_PRODUCTS: 'GET_ALL_PRODUCTS',
+  CONFIGURE_LINKED_PRODUCTS: 'CONFIGURE_LINKED_PRODUCTS',
   CONFIGURE_DEFAULTS: 'CONFIGURE_DEFAULTS',
   CONFIGURE_CONSTRAINTS: 'CONFIGURE_CONSTRAINTS',
   SET_VALUE: 'SET_VALUE',
   EVALUATE_CONSTRAINTS: 'EVALUATE_CONSTRAINTS',
   UPDATE_SELECTIONS: 'UPDATE_SELECTIONS',
+  UPDATE_LINKED_PRODUCTS: 'UPDATE_LINKED_PRODUCTS',
   APPLY_CONSTRAINTS: 'APPLY_CONSTRAINTS',
   REMOVE_CONSTRAINTS: 'REMOVE_CONSTRAINTS'
 };
@@ -35,9 +38,15 @@ export function createProductStore (config, shopifyClient) {
       const products = await retrieveProducts(shopifyClient);
       commit(MUTATIONS.RECEIVE_ALL_PRODUCTS, {products});
 
+      dispatch(ACTIONS.CONFIGURE_LINKED_PRODUCTS);
       dispatch(ACTIONS.CONFIGURE_DEFAULTS);
       dispatch(ACTIONS.CONFIGURE_CONSTRAINTS);
       dispatch(ACTIONS.EVALUATE_CONSTRAINTS);
+      dispatch(ACTIONS.UPDATE_LINKED_PRODUCTS);
+    },
+
+    [ACTIONS.CONFIGURE_LINKED_PRODUCTS] ({state}) {
+      configureLinkedProducts(state);
     },
 
     [ACTIONS.CONFIGURE_DEFAULTS] ({state, commit}) {
@@ -85,9 +94,14 @@ export function createProductStore (config, shopifyClient) {
       });
     },
 
+    [ACTIONS.UPDATE_LINKED_PRODUCTS] ({commit}) {
+      updateLinkedProducts(commit);
+    },
+
     [ACTIONS.SET_VALUE] ({commit, dispatch}, {product, option}) {
       product.set(commit, option);
       dispatch(ACTIONS.EVALUATE_CONSTRAINTS);
+      dispatch(ACTIONS.UPDATE_LINKED_PRODUCTS);
     }
   };
 
