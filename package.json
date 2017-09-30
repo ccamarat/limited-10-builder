@@ -11,7 +11,8 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "stp": "git subtree push --prefix dist origin heroku"
+    "stp": "git subtree push --prefix dist origin heroku",
+    "postbuild": "git add dist &&git commit -m \"rebuilt subtree\" &&git push origin master &&npm run stp"
   },
   "dependencies": {
     "bulma": "^0.5.3",
