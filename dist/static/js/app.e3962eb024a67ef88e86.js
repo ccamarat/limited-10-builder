@@ -799,8 +799,22 @@ function configureConstraints(_ref) {
 }
 
 function evaluateConstraints() {
-  return constraints.filter(function (c) {
-    return c.needsAttention();
+  // Collect eval results
+  var results = constraints.map(function (c) {
+    return c.evaluate();
+  });
+  return results
+  // only interested in items that need attention
+  .filter(function (r) {
+    return r.needsAttention;
+  })
+  // should enable first, then disable
+  .sort(function (r) {
+    return r.nextAction === __WEBPACK_IMPORTED_MODULE_2__products__["b" /* MUTATIONS */].ENABLE_OPTION ? -1 : 1;
+  })
+  // return ordered list of constraints needing attention
+  .map(function (r) {
+    return r.constraint;
   });
 }
 
@@ -811,11 +825,11 @@ function createConstraint(target, tree, rule) {
   var isActive = void 0;
   var nextAction = void 0;
 
-  return {
+  var constraint = {
     source: source,
     target: target,
     targetOptions: targetOptions,
-    needsAttention: function needsAttention() {
+    evaluate: function evaluate() {
       var shouldBeActive = !!source.options.find(function (o) {
         return o.selected && check(o);
       });
@@ -824,7 +838,7 @@ function createConstraint(target, tree, rule) {
         nextAction = shouldBeActive ? __WEBPACK_IMPORTED_MODULE_2__products__["b" /* MUTATIONS */].DISABLE_OPTION : __WEBPACK_IMPORTED_MODULE_2__products__["b" /* MUTATIONS */].ENABLE_OPTION;
         isActive = shouldBeActive;
       }
-      return needsAttention;
+      return { needsAttention: needsAttention, nextAction: nextAction, constraint: constraint };
     },
     enforce: function enforce(commit) {
       targetOptions.forEach(function (option) {
@@ -833,6 +847,7 @@ function createConstraint(target, tree, rule) {
       nextAction = null;
     }
   };
+  return constraint;
 }
 
 function createCheckFn(rule) {
@@ -2027,4 +2042,4 @@ function ShopifyClient(config) {
 
 /***/ })
 ],[72]);
-//# sourceMappingURL=app.633278d2c5c012e676dd.js.map
+//# sourceMappingURL=app.e3962eb024a67ef88e86.js.map
