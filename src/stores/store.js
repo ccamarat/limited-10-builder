@@ -1,25 +1,15 @@
 import Vuex from 'vuex';
-import * as actions from './actions';
-import * as mutations from './mutations';
-import * as getters from './getters';
-import {createProductStore} from './modules/products';
-import {createCart} from './modules/cart';
 import { createLogger } from '../services/logger';
+import { createProductStore } from './products';
 
-const debug = process.env.NODE_ENV !== 'production';
+// const debug = process.env.NODE_ENV !== 'production';
+const debug = false;
 
 export function createStore (config, shopifyClient) {
-  const products = createProductStore(config, shopifyClient);
-  const cart = createCart(shopifyClient);
+  const store = createProductStore(config, shopifyClient);
 
   return new Vuex.Store({
-    actions,
-    mutations,
-    getters,
-    modules: {
-      cart,
-      products
-    },
+    ...store,
     strict: debug,
     plugins: debug ? [createLogger()] : []
   });

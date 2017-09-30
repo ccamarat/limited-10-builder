@@ -1,12 +1,13 @@
 <template>
-    <product-list :products="allProducts" style="display: flex; flex-wrap: wrap;"></product-list>
+    <product-list :products="tree" style="display: flex; flex-wrap: wrap;"></product-list>
 </template>
 
 <style lang="scss" scoped>
 </style>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex';
+  import { mapState } from 'vuex';
+  import { ACTIONS } from '../stores/products';
   import ProductList from './ProductList.vue';
 
   export default {
@@ -14,17 +15,13 @@
       ProductList
     },
 
-    computed: mapGetters([
-      'allProducts'
-    ]),
-
-    methods: mapActions([
-      'addToCart'
+    computed: mapState([
+      'tree'
     ]),
 
     async created () {
-      await this.$store.dispatch('getAllProducts');
-      this.$store.dispatch('addDefaultItemsToCart');
+      await this.$store.dispatch(ACTIONS.GET_ALL_PRODUCTS);
+      // this.$store.dispatch('addDefaultItemsToCart');
     }
   };
 </script>

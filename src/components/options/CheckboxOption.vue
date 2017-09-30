@@ -1,5 +1,5 @@
 <template>
-  <a :disabled="isDisabled" class="button" :class="{'is-success': selectedOption.value}" @click="toggleCart">
+  <a :disabled="isDisabled" class="button" :class="{'is-success': selectedOption && selectedOption.value}" @click="toggleCart">
     {{product.title}}
   </a>
 </template>
@@ -15,8 +15,8 @@
 </style>
 
 <script>
-  import { getFullProductTitle } from '../../services/cartUtil';
-  import { mapActions, mapGetters } from 'vuex';
+  import { mapActions } from 'vuex';
+  import { ACTIONS } from '../../stores/products';
 
   export default {
     props: {
@@ -24,11 +24,8 @@
       product: Object
     },
     computed: {
-      ...mapGetters(['cart']),
       selectedOption () {
-        const title = getFullProductTitle(this.product);
-        const cartItem = this.cart.find(p => p.title === title);
-        return cartItem ? cartItem.values[0] : this.options[0];
+        return this.options.find(o => o.selected);
       },
       isDisabled () {
         return !!this.options.find(o => !o.enabled);
@@ -36,11 +33,11 @@
     },
     methods: {
       ...mapActions([
-        'addToCart'
+        ACTIONS.SET_VALUE
       ]),
       toggleCart () {
         const option = this.options.find(o => o !== this.selectedOption);
-        this.addToCart({product: this.product, option});
+        this[ACTIONS.SET_VALUE]({product: this.product, option});
       }
     }
   };

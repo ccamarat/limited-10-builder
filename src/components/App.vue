@@ -4,14 +4,6 @@
     <div id="app" class="content">
       <h2>Select Options</h2>
       <product-list-container></product-list-container>
-
-      <!--
-      don't think we need a cart.
-      <div class="column">
-        <h2>Cart</h2>
-        <cart></cart>
-      </div>
-      -->
     </div>
   </section>
 </template>
@@ -51,12 +43,10 @@
 
 <script>
   import ProductListContainer from './ProductListContainer.vue';
-  import Cart from './Cart.vue';
 
   export default {
     components: {
-      ProductListContainer,
-      Cart
+      ProductListContainer
     }
   };
 </script>

@@ -1,96 +1,44 @@
-import { findCartItem, addProductDefault } from './modules/cart';
-import * as types from './mutation-types';
+import { MUTATIONS } from './products';
 
 let constraints = [];
 
-export const actions = {
-  configureConstraints ({state}) {
-    constraints = createConstraints(state.products);
-  },
-
-  enforceConstraints (vuex, item) {
-    constraints.forEach(c => {
-      c.onchange(vuex, item);
-    });
-  },
-
-  cleanupCart ({state, dispatch}, option) {
-    if (option.enabled) {
-      console.warn('option is enabled; nothing changing. Should not be here');
-      return;
-    }
-
-    const {existing} = findCartItem(option.product, state.cart);
-    const found = existing && existing.values.find(i => i.value === option.value);
-    if (found) {
-      addProductDefault(dispatch, found.product);
-    }
-  }
-};
-
-export const mutations = {
-  [types.APPLY_CONSTRAINT] (state, {option, enabled}) {
-    option.enabled = enabled;
-  }
-};
-
-function createConstraints ({all, variations, options}) {
-  const constraints = [];
+export function configureConstraints ({tree, variations}) {
   variations
     .forEach(v => {
-      if (v.variation.config.constraints) {
-        const c = v.variation.config.constraints.map(createConstraint.bind(null, v.variation, all));
+      if (v.config.constraints) {
+        const c = v.config.constraints.map(createConstraint.bind(null, v, tree));
         constraints.push(...c);
       }
     });
-  return constraints;
 }
 
-function createConstraint (self, allProducts, rule) {
-  const peer = findPeer(allProducts, rule.when.source);
-  const targets = findTargets(self.options, rule);
-  const shouldEnforce = createCheckFn(rule.when);
-  let isActive = false;
+export function evaluateConstraints () {
+  return constraints.filter(c => c.needsAttention());
+}
 
-  function enforce ({commit, dispatch}) {
-    if (isActive) {
-      return;
-    }
-    targets.forEach(option => {
-      commit(types.APPLY_CONSTRAINT, {option, enabled: false});
-      dispatch('cleanupCart', option);
-    });
-    isActive = true;
-  }
-
-  function free ({commit, dispatch}) {
-    if (!isActive) {
-      return;
-    }
-    targets.forEach(option => {
-      commit(types.APPLY_CONSTRAINT, {option, enabled: true});
-      // not needed cos the constraint is removed, right? - dispatch('cleanupCart', option);
-    });
-    isActive = false;
-  }
+function createConstraint (target, tree, rule) {
+  const source = findPeer(tree, rule.when.source);
+  const targetOptions = findTargets(target.options, rule);
+  const check = createCheckFn(rule.when);
+  let isActive;
+  let nextAction;
 
   return {
-    // BEGIN for debug only
-    // title: self.title,
-    // peer: peer.title,
-    // get isActive () {
-    //   return isActive;
-    // },
-    // END for debug only
-    onchange (vuex, {product, option}) {
-      if (product !== peer) {
-        return;
+    source,
+    target,
+    targetOptions,
+    needsAttention () {
+      const shouldBeActive = !!source.options.find(o => o.selected && check(o));
+      const needsAttention = shouldBeActive !== isActive;
+      if (needsAttention) {
+        nextAction = shouldBeActive ? MUTATIONS.DISABLE_OPTION : MUTATIONS.ENABLE_OPTION;
+        isActive = shouldBeActive;
       }
-      if (shouldEnforce(option)) {
-        enforce(vuex);
-      } else {
-        free(vuex);
-      }
+      return needsAttention;
+    },
+    enforce (commit) {
+      targetOptions.forEach(option => commit(nextAction, {option}));
+      nextAction = null;
     }
   };
 }
