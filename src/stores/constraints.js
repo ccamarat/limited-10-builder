@@ -13,7 +13,15 @@ export function configureConstraints ({tree, variations}) {
 }
 
 export function evaluateConstraints () {
-  return constraints.filter(c => c.needsAttention());
+  // Collect eval results
+  const results = constraints.map(c => c.evaluate());
+  return results
+    // only interested in items that need attention
+    .filter(r => r.needsAttention)
+    // should enable first, then disable
+    .sort((r) => r.nextAction === MUTATIONS.ENABLE_OPTION ? -1 : 1)
+    // return ordered list of constraints needing attention
+    .map(r => r.constraint);
 }
 
 function createConstraint (target, tree, rule) {
@@ -23,24 +31,25 @@ function createConstraint (target, tree, rule) {
   let isActive;
   let nextAction;
 
-  return {
+  const constraint = {
     source,
     target,
     targetOptions,
-    needsAttention () {
+    evaluate () {
       const shouldBeActive = !!source.options.find(o => o.selected && check(o));
       const needsAttention = shouldBeActive !== isActive;
       if (needsAttention) {
         nextAction = shouldBeActive ? MUTATIONS.DISABLE_OPTION : MUTATIONS.ENABLE_OPTION;
         isActive = shouldBeActive;
       }
-      return needsAttention;
+      return {needsAttention, nextAction, constraint};
     },
     enforce (commit) {
       targetOptions.forEach(option => commit(nextAction, {option}));
       nextAction = null;
     }
   };
+  return constraint;
 }
 
 function createCheckFn (rule) {
