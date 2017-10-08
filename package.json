@@ -20,7 +20,6 @@
     "sass-loader": "^6.0.6",
     "shopify-buy": "^0.7.1",
     "vue": "^2.4.4",
-    "vue-style-loader": "^3.0.3",
     "vuex": "^2.4.1"
   },
   "devDependencies": {
