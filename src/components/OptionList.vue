@@ -1,5 +1,5 @@
 <template>
-  <component :is="componentType" :options="options" :product="product"></component>
+  <component :is="componentType" :options="options" :product="product" :hide-title="hideTitle"></component>
 </template>
 
 <style lang="scss">
@@ -19,7 +19,11 @@
 
     props: {
       options: Array,
-      product: Object
+      product: Object,
+      hideTitle: {
+        type: Boolean,
+        default: false
+      }
     },
 
     computed: {

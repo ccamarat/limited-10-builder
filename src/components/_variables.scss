@@ -1,2 +1,13 @@
-$color-selected: #0f0;
-$color-disabled: #ccc;
+// Theme based on
+// https://material.io/color/#!/?view.left=0&view.right=1&primary.color=fefefe&secondary.color=07a730&secondary.text.color=eeffee
+$color-primary: #fefefe;
+$color-primary-light: #fff;
+$color-primary-dark: #ccc;
+$color-primary-background: lighten($color-primary-dark, 15%);
+
+$color-secondary: #07a730;
+$color-secondary-light: #58da5f;
+$color-secondary-dark: #007700;
+
+$color-light-text: #000;
+$color-dark-text: #fefefe;

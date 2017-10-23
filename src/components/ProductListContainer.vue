@@ -1,5 +1,5 @@
 <template>
-    <product-list :products="tree" style="display: flex; flex-wrap: wrap;"></product-list>
+    <product-list :products="tree"></product-list>
 </template>
 
 <style lang="scss" scoped>
@@ -19,9 +19,8 @@
       'tree'
     ]),
 
-    async created () {
-      await this.$store.dispatch(ACTIONS.GET_ALL_PRODUCTS);
-      // this.$store.dispatch('addDefaultItemsToCart');
+    created () {
+      this.$store.dispatch(ACTIONS.GET_ALL_PRODUCTS);
     }
   };
 </script>

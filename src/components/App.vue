@@ -1,52 +1,81 @@
 <template>
-  <section class="section">
-    <h1>Gun Builder Constraint Checker</h1>
-    <div id="app" class="content">
-      <h2>Select Options</h2>
-      <product-list-container></product-list-container>
+  <section class="layout-container">
+    <div class="gun-builder">
+      <div class="left-side">
+        <product-list-container></product-list-container>
+      </div>
+      <div class="right-side">
+        <viewer></viewer>
+      </div>
+    </div>
+    <click-mask class="click-mask"></click-mask>
+    <div class="floating-list">
+      <variant-mixer></variant-mixer>
     </div>
   </section>
 </template>
 
 <style lang="scss">
-  @import '~bulma';
-
+  // Provide baseline element size for relatively-sized components
   html {
-    font-size: 12px;
+    font-size: 16px;
+  }
+  // temporarily hide the logo
+  .site-header__logo {
+    display: none
+  }
+</style>
+
+<style lang="scss" scoped>
+  @import "./variables";
+
+  .layout-container {
+    position: relative;
+  }
+  .gun-builder {
+    display: flex;
+    flex-wrap: nowrap;
+
+    > div {
+      min-height: 100%;
+    }
+  }
+  .left-side {
+    flex: 0 0 215px;
+  }
+  .right-side {
+    flex: auto;
+  }
+  .floating-list {
+    position: absolute;
+    top: 0;
+    left: 220px;
   }
 
-  h1 {
-    @extend .title;
-    @extend .is-1;
+  // Hide the floating list when clicking outside of it
+  .click-mask {
+    background: $color-primary-background;
+    opacity: 0.15;
+    z-index: 1;
   }
-  h2 {
-    @extend .subtitle;
-    @extend .is-2;
-  }
-  h3 {
-    @extend .subtitle;
-    @extend .is-3;
-  }
-  h4 {
-    @extend .subtitle;
-    @extend .is-4;
-  }
-
-  body {
-    font-size: .8rem;
-  }
-
-  body li li {
-    margin-left: 10px;
+  .left-side,
+  .floating-list {
+    z-index: 2;
   }
 </style>
 
 <script>
   import ProductListContainer from './ProductListContainer.vue';
+  import Viewer from './viewer/Viewer';
+  import VariantMixer from './VariantMixer';
+  import ClickMask from './ClickMask';
 
   export default {
     components: {
-      ProductListContainer
+      ClickMask,
+      VariantMixer,
+      ProductListContainer,
+      Viewer
     }
   };
 </script>

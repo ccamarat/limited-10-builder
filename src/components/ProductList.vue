@@ -1,65 +1,81 @@
 <template>
-  <div v-if="isVisible()">
-    <div class="content" v-for="p in products" style="display: flex;">
-      <div v-if="hasChildren(p)" class="box">
-        <component :is="level">
-          {{ p.title }} - {{ p.price | currency }}
-        </component>
-        <product-list :products="p.variations"></product-list>
+  <ul>
+    <li class="product-item" :class="{selected: p === activeProduct}" v-for="p in products" @click="TOGGLE_PRODUCT(p)">
+      <div class="product-title">
+        {{ p.title }}
       </div>
 
-      <div v-if="hasOptions(p)" class="panel">
-        <div class="panel-heading">
-            {{ p.title }} - {{ p.price | currency }}
-        </div>
-        <div class="panel-block">
-          <option-list :options="p.options" :product="p"></option-list>
-        </div>
+      <div class="product-price">
+        {{ p.price | currency }}
       </div>
-
-    </div>
-  </div>
+    </li>
+  </ul>
 </template>
 
+<style lang="scss" scoped>
+  @import "./variables";
+
+  .product-item {
+    background: $color-primary-light;
+    color: $color-light-text;
+    margin-bottom: 0;
+    padding: 0 10px;
+    border-top: 1px solid $color-primary-dark;
+    border-bottom: 3px solid $color-primary-light;
+    font-family: Trebuchet, Verdana, Helvetica, serif;
+
+    &.selected {
+      background: $color-primary-light;
+      color: $color-light-text;
+      border-bottom: 3px solid $color-secondary;
+      cursor: pointer;
+    }
+
+    &:hover {
+      background: $color-primary-background;
+      border-bottom: 3px solid $color-primary-background;
+      cursor: pointer;
+
+      &.selected {
+        border-bottom: 3px solid $color-secondary;
+      }
+    }
+
+    &:first-of-type {
+      border-top: 1px solid $color-primary-dark;
+    }
+  }
+  ul {
+    border-bottom: 1px solid $color-primary-dark;
+  }
+  .product-title {
+    font-weight: bold;
+  }
+
+  .product-price {
+    font-size: .8rem;
+  }
+</style>
+
 <script>
-  import OptionList from './OptionList.vue';
+  import { mapActions, mapState } from 'vuex';
+  import { ACTIONS } from '../stores/visibility';
 
   export default {
     name: 'product-list',
-
-    components: {
-      OptionList
-    },
 
     props: {
       products: Array
     },
 
-    data () {
-      return {
-        level: getLevel(this.products[0])
-      };
+    computed: {
+      ...mapState({
+        activeProduct: (state) => state.visibility.activeProduct
+      })
     },
 
     methods: {
-      isVisible () {
-        return this.products.length > 0;
-      },
-      hasOptions(product) {
-        return product.options.length > 0;
-      },
-      hasChildren(product) {
-        return product.variations.length > 0;
-      }
+      ...mapActions([ACTIONS.TOGGLE_PRODUCT])
     }
   };
-
-  function getLevel (product) {
-    let level = 2;
-    while (product) {
-      level++;
-      product = product.parent;
-    }
-    return `h${level}`;
-  }
 </script>
